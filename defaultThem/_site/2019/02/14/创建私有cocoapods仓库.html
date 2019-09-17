@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>创建私有cocoapods仓库 | Maco</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="创建私有cocoapods仓库" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="我之前写了一篇打包公有组件到cocoapods仓库，但是随着我们项目的逐渐增大，公司内部也有一些私有的组件供公司内部项目的使用，这就需要我们创建私有的仓库来管理组件了，下面我们就使用pods库来管理我们的私有库。" />
+<meta property="og:description" content="我之前写了一篇打包公有组件到cocoapods仓库，但是随着我们项目的逐渐增大，公司内部也有一些私有的组件供公司内部项目的使用，这就需要我们创建私有的仓库来管理组件了，下面我们就使用pods库来管理我们的私有库。" />
+<link rel="canonical" href="http://localhost:4000/2019/02/14/%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89cocoapods%E4%BB%93%E5%BA%93.html" />
+<meta property="og:url" content="http://localhost:4000/2019/02/14/%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89cocoapods%E4%BB%93%E5%BA%93.html" />
+<meta property="og:site_name" content="Maco" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-02-14T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"我之前写了一篇打包公有组件到cocoapods仓库，但是随着我们项目的逐渐增大，公司内部也有一些私有的组件供公司内部项目的使用，这就需要我们创建私有的仓库来管理组件了，下面我们就使用pods库来管理我们的私有库。","@type":"BlogPosting","url":"http://localhost:4000/2019/02/14/%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89cocoapods%E4%BB%93%E5%BA%93.html","headline":"创建私有cocoapods仓库","dateModified":"2019-02-14T00:00:00+08:00","datePublished":"2019-02-14T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/02/14/%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89cocoapods%E4%BB%93%E5%BA%93.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Maco" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Maco</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">创建私有cocoapods仓库</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-02-14T00:00:00+08:00" itemprop="datePublished">Feb 14, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>我之前写了一篇打包公有组件到cocoapods仓库，但是随着我们项目的逐渐增大，公司内部也有一些私有的组件供公司内部项目的使用，这就需要我们创建私有的仓库来管理组件了，下面我们就使用pods库来管理我们的私有库。</p>
+
+<h3 id="一创建版本库repo">一、创建版本库（repo）</h3>
+
+<p>首先我们需要在我们的项目管理（git或者svn）中创建我们自己的组件版本库（repo），如果已经创建过了，就无需再创建了，以下以码云为例（因为私有库免费）：</p>
+
+<p><img src="../../../../assets/cocoapods/privateRepo.png" alt="" /></p>
+
+<p>回到终端，将私有版本库添加到本地repo中，repo就是repository的缩写</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$</span> <span class="nv">pod</span> <span class="nv">repo</span> <span class="nv">add</span> <span class="nv">repo</span> <span class="nv">https:</span><span class="sr">//gi</span><span class="nv">tee</span><span class="o">.</span><span class="nv">com</span><span class="sr">/macod/</span><span class="nv">repo</span><span class="o">.</span><span class="nv">git</span>
+</code></pre></div></div>
+
+<p>在Finder目录中<code class="highlighter-rouge">～/.cocoapods/repos</code>，发现增加了一个repo存储库，如果没有说明失败了</p>
+
+<h3 id="二创建组件代码库">二、创建组件代码库</h3>
+
+<p>和创建版本库一样，只是要选择一下MIT License</p>
+
+<p>将组组件代码仓库clone到本地，将打包的组件代码拷贝到项目中</p>
+
+<p>使用：</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$</span> <span class="nv">pod</span> <span class="nv">spec</span> <span class="nv">create</span> <span class="err">组件名</span>
+</code></pre></div></div>
+
+<p>创建.podspec文件，然后修改podspec文件中的内容，类似如下：</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">Pod::</span><span class="nv">Spec</span><span class="o">.</span><span class="k">new</span> <span class="k">do</span> <span class="o">|</span><span class="nv">spec</span><span class="o">|</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">name</span>         <span class="o">=</span> <span class="s">"SwipeView"</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">version</span>      <span class="o">=</span> <span class="s">"0.0.1"</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">summary</span>      <span class="o">=</span> <span class="s">"swipe view"</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">description</span>  <span class="o">=</span> <span class="s">"swipe view for iOS"</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">homepage</span>     <span class="o">=</span> <span class="s">"https://gitee.com/macod/SwipeView"</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">license</span>      <span class="o">=</span> <span class="p">{</span> <span class="p">:</span><span class="nv">type</span> <span class="o">=&gt;</span> <span class="s">"MIT"</span><span class="p">,</span> <span class="p">:</span><span class="nv">file</span> <span class="o">=&gt;</span> <span class="s">"LICENSE"</span> <span class="p">}</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">author</span>             <span class="o">=</span> <span class="p">{</span> <span class="s">"zhangzhifang"</span> <span class="o">=&gt;</span> <span class="s">"zhangzhifang@zuinianqing.com"</span> <span class="p">}</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">platform</span>     <span class="o">=</span> <span class="p">:</span><span class="nv">ios</span><span class="p">,</span> <span class="s">"7.0"</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">source</span>       <span class="o">=</span> <span class="p">{</span> <span class="p">:</span><span class="nv">git</span> <span class="o">=&gt;</span> <span class="s">"https://gitee.com/macod/SwipeView.git"</span><span class="p">,</span> <span class="p">:</span><span class="nv">tag</span> <span class="o">=&gt;</span> <span class="s">"#{spec.version}"</span> <span class="p">}</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">source_files</span>  <span class="o">=</span> <span class="s">"SwipeView/**/*.{h,m}"</span>
+
+ <span class="nv">spec</span><span class="o">.</span><span class="nv">requires_arc</span> <span class="o">=</span> <span class="nv">true</span>
+
+<span class="nv">end</span>
+</code></pre></div></div>
+
+<p>然后验证内容修改仓库配置是否正确</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$</span> <span class="nv">pod</span> <span class="nv">lib</span> <span class="nv">lint</span>
+</code></pre></div></div>
+
+<p>根据错误进行修改</p>
+
+<h3 id="三将描述文件推送到版本库">三、将描述文件推送到版本库</h3>
+
+<p>将项目打上tag推送到远程仓库，tag和版本号要对应</p>
+
+<p>完成后将描述文件push到版本库</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$</span> <span class="nv">pod</span> <span class="nv">repo</span> <span class="nb">push</span> <span class="nv">repo</span> <span class="err">组件名</span><span class="o">.</span><span class="nv">podspec</span> <span class="err">—</span><span class="nv">allow</span><span class="o">-</span><span class="nv">warnings</span>
+</code></pre></div></div>
+
+<p>这个过程其实就是:</p>
+
+<p>1、拉取远程版本仓库repo</p>
+
+<p>2、添加组件名.podspec文件到版本库中</p>
+
+<p>3、push到远程</p>
+
+<p>这时会对远程仓库进行验证，成功的话会在~/.cocoapods/repos/repo中发现新增的仓库信息了</p>
+
+<p>若是出现错误信息</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[!] The repo MyRepo at ../.cocoapods/repos/MyRepo is not clean
+</code></pre></div></div>
+
+<p>更新下我们的版本库，</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$</span> <span class="nv">pod</span> <span class="nv">repo</span> <span class="nv">update</span> <span class="nv">MyRepo</span>
+</code></pre></div></div>
+
+<h3 id="四私有仓库的使用">四、私有仓库的使用</h3>
+
+<p>使用私有仓库需要再Podfile文件中添加指明你的版本库地址</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">source</span> <span class="s">'https://gitee.com/macod/repo.git'</span>
+</code></pre></div></div>
+
+<p>这里是版本库的地址</p>
+
+<p>若是还使用了公有的pod库，需要把公有库地址也写上</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">source</span> <span class="err">‘</span><span class="nv">https:</span><span class="sr">//gi</span><span class="nv">thub</span><span class="o">.</span><span class="nv">com</span><span class="sr">/CocoaPods/</span><span class="nv">Specs</span><span class="o">.</span><span class="nv">git</span><span class="err">’</span>
+</code></pre></div></div>
+
+<p>Podfile类似这样:</p>
+
+<div class="language-perl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">source</span> <span class="s">'https://github.com/CocoaPods/Specs.git
+source '</span><span class="nv">https:</span><span class="sr">//gi</span><span class="nv">tee</span><span class="o">.</span><span class="nv">com</span><span class="sr">/macod/</span><span class="nv">repo</span><span class="o">.</span><span class="nv">git</span><span class="s">'
+
+target '</span><span class="nv">DevOCFramwork</span><span class="s">' do
+
+pod "AFNetworking"
+pod "SDWebImage"
+pod "YYModel"
+pod "FMDB"
+pod "SVProgressHUD"
+pod "pop"
+pod "Masonry"
+pod "SwipeView",    '</span><span class="o">~&gt;</span> <span class="mf">0.0.1</span><span class="s">'        #私有库
+pod "RSA",          '</span><span class="o">~&gt;</span> <span class="mf">0.0.2</span><span class="s">'        #私有库
+
+    target '</span><span class="nv">DevOCFramworkTests</span><span class="s">' do
+		inherit! :search_paths 
+	end
+
+    target '</span><span class="nv">DevOCFramworkUITests</span><span class="err">'</span> <span class="k">do</span>
+		<span class="nv">inherit</span><span class="o">!</span> <span class="p">:</span><span class="nv">search_paths</span> 	
+	<span class="nv">end</span>
+<span class="nv">end</span>
+</code></pre></div></div>
+
+<p>最后pod install就好了</p>
+
+<p>执行<code class="highlighter-rouge">pod install</code>命令时</p>
+
+<p>1、会拉取远程Podfile中soruce标记版本库到本地的repos文件中</p>
+
+<p>2、在版本库中搜索我们的 pod ’SwipeView’的SwipeView.podsepc文件</p>
+
+<p>3、根据SwipeView.podspec文件中描述的源码地址下载并整合到项目中</p>
+
+<h3 id="注意️">注意⚠️</h3>
+
+<p>如果我们的私有库中组件名和公有库组件名相同了，在Podfile中pod后面不说明版本号的话，会默认导入公有库中的组件，所以我们创建组件的时候最好和公有库中的组件不要重名</p>
+
+<p>当说明版本号的时候，私有库组件版本号在公有库中也有的话，也是默认导入公有库组件</p>
+
+  </div><a class="u-url" href="/2019/02/14/%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89cocoapods%E4%BB%93%E5%BA%93.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">联系我</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <!-- <li class="p-name"> -->
+            <!---->
+              <!-- Maco -->
+            <!---->
+            <!-- </li> --><li class="social-media-li"><a class="u-email" href="https://www.weibo.com/u/1804548547">微博</a>&nbsp;&nbsp;&nbsp;&nbsp;</li><li class="social-media-li"><a class="u-email" href="mailto:zhang_zhifang169@163.com">邮箱</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li class="social-media-li"><a href="https://www.facebook.com/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://github.com/SuperHaiFeng"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.linkedin.com/in/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.twitter.com/Macode520"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username"></span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>©  2019 Maco  保留所有权利。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

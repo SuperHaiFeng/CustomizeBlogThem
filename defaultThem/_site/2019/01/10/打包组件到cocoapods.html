@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>打包组件到cocoapods | Maco</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="打包组件到cocoapods" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="我们在iOS开发中，相信所有小伙伴都经常使用到cocoapods，使用别人上传的组件用在我们自己的项目中，这会大大节省我们开发的时间，比如AFNetworking、Masonry等等，但是你们有没有想过把自己写的一些好用的组件也放到cocoapods中，让别的小伙伴使用啊，废话不多说，我们直接看流程：" />
+<meta property="og:description" content="我们在iOS开发中，相信所有小伙伴都经常使用到cocoapods，使用别人上传的组件用在我们自己的项目中，这会大大节省我们开发的时间，比如AFNetworking、Masonry等等，但是你们有没有想过把自己写的一些好用的组件也放到cocoapods中，让别的小伙伴使用啊，废话不多说，我们直接看流程：" />
+<link rel="canonical" href="http://localhost:4000/2019/01/10/%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6%E5%88%B0cocoapods.html" />
+<meta property="og:url" content="http://localhost:4000/2019/01/10/%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6%E5%88%B0cocoapods.html" />
+<meta property="og:site_name" content="Maco" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-10T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"我们在iOS开发中，相信所有小伙伴都经常使用到cocoapods，使用别人上传的组件用在我们自己的项目中，这会大大节省我们开发的时间，比如AFNetworking、Masonry等等，但是你们有没有想过把自己写的一些好用的组件也放到cocoapods中，让别的小伙伴使用啊，废话不多说，我们直接看流程：","@type":"BlogPosting","url":"http://localhost:4000/2019/01/10/%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6%E5%88%B0cocoapods.html","headline":"打包组件到cocoapods","dateModified":"2019-01-10T00:00:00+08:00","datePublished":"2019-01-10T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/01/10/%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6%E5%88%B0cocoapods.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Maco" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Maco</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline"> 打包组件到cocoapods</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-01-10T00:00:00+08:00" itemprop="datePublished">Jan 10, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>我们在iOS开发中，相信所有小伙伴都经常使用到cocoapods，使用别人上传的组件用在我们自己的项目中，这会大大节省我们开发的时间，比如AFNetworking、Masonry等等，但是你们有没有想过把自己写的一些好用的组件也放到cocoapods中，让别的小伙伴使用啊，废话不多说，我们直接看流程：</p>
+
+<p>其实cocoapods也是使用github来进行代码管理的，所以我们也要传一份我们的代码到github上。</p>
+
+<p><strong>一、在github创建一个项目</strong></p>
+
+<p>首先我们需要有一个github账号，账号创建我就不说了，相信大家都会，接下来我们就创建我们的项目，首先我们需要填写我们的项目名称Repository name，然后选择license，gitignore，license是必选的，这个我后面后说，然后点击create repository按钮创建。这样我们的项目就创建好了，但是这还是一个空项目，所以我们要把它clone到我们本地，然后把我们的组件拷贝进去上传到github，代码上传我就不说了，就那一套命令。上传完成后我们要打tag，这个tag必须得打的，这个和我们后面配置spec的version是对应的。</p>
+
+<p><code class="highlighter-rouge">git tag -a v1.0.0</code></p>
+
+<p><code class="highlighter-rouge">git push origin v1.0.0</code></p>
+
+<p><code class="highlighter-rouge">可以使用git show tag查看我们的打的tag</code></p>
+
+<p>这就完成我们的第一步了，接下来我们上传cocoapods</p>
+
+<p><strong>二、上传cocoapods</strong></p>
+
+<p>1、命令行cd到我们刚拉下来的工程根目录下，初始化一个Podspec文件，这个文件最好与项目名相同</p>
+
+<p><code class="highlighter-rouge">pod spec create 项目名</code></p>
+
+<p>2、打开我们创建的spec，配置spec文件，tag一定对应github tag，配置的时候有自动生成的一些，比如spec.name、spec.version等，</p>
+
+<p>Spec.homepage是我们必须填的，它对应我们的github项目地址</p>
+
+<p>Spec.license也是必须填的，比如 spec.license      = { :type =&gt; “MIT”, :file =&gt; “LICENSE” }</p>
+
+<p>spec.author就填我们刚创建的就行，比如  spec.author = { “作者” =&gt; “邮箱” }</p>
+
+<p>Spec.source也是必须填的，对应我们的组件git地址对应的tag号</p>
+
+<p>Spec.source_files也需要填，对应我们组件都包括什么类型的文件，比如.h，.m文件</p>
+
+<p>其他的可以选填了</p>
+
+<p>3、配置完成后，创建pods账号，当然有账号的就不用创建了，创建账号的命令为：</p>
+
+<p><code class="highlighter-rouge">pod trunk register 邮箱 联系人 --description="描述" --verbose</code></p>
+
+<p>然后会发一封邮件到你邮箱进行验证</p>
+
+<p><code class="highlighter-rouge">pod trunk me</code> 可以查看trunk信息</p>
+
+<p>4、接下来我们要上传我们的组件</p>
+
+<p>先使用 <code class="highlighter-rouge">pod spec lint 项目名.podspec</code> 验证是否通过，如果不通过要修改配置文件</p>
+
+<p>5、上传组件</p>
+
+<p><code class="highlighter-rouge">pod trunk push</code></p>
+
+<p>在2014年的时候，cocoapods推出了trunk，以后trunk是提交到pod的唯一的方法，不接受对cocoapods specs repo的pull请求。所以在2014年之前，可以在cocoapods的github上把我们刚刚创建的spec文件上传到他们的github上，但是出了trunk后，我们省事了很多，直接上传就好了。</p>
+
+<h4 id="那我们怎么pod我们本地的组件到我们的项目中"><strong>那我们怎么pod我们本地的组件到我们的项目中：</strong></h4>
+
+<p>同样在打包到项目之前也需要在本地创建好库名称，以及创建podspec配置文件，完成后需要在本地init个git文件，然后提交到git，完成后就可以pod到项目中了，需要注意的是在podfile文件中需要写明该库所在的具体地址，例如：pod ‘RSA01’, :path=&gt; ‘/Users/zhangzhifang/RSA01’ ，执行pod install</p>
+
+<p>引入成功后在pods项目中会多一个Development pods文件，本地pod库放在该文件夹下</p>
+
+<p><img src="../../../../assets/cocoapods/cacoapodsDic.png" alt="" /></p>
+
+<h3 id="到这里我们基本上就算完成了接下来说一下我打包时遇到的坑"><strong>到这里我们基本上就算完成了，接下来说一下我打包时遇到的坑</strong></h3>
+
+<h4 id="注意️"><strong>注意⚠️：</strong></h4>
+
+<p>1、在创建git项目的时候，必须要选择license,gitignore，一般情况下选择MIT License，因为MIT是软件授权条款（源自麻省理工学院），选择它就认为你授权了你上传的项目对外开源，被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。不选择license,上传的时候会提示找不到license，到时候验证失败无法上传。当然也可以不选择MIT，选择别的授权条款，如果选择别的，在.podspec文件中配置spec.license的时候需要修改一下type值</p>
+
+<p><img src="../../../../assets/cocoapods/creategithub.png" alt="" /></p>
+
+<p>2、如果出现xcrun: error: unable to find utility “simctl”, not a developer tool or in PATH</p>
+
+<p>错误，去xcode-&gt;preference-&gt;location下选择commons line tools</p>
+
+<p>3、在验证的时候出现warning的时候，最好解决一下，否则上传的时候有可能会失败（虽然可以使用<em>pod</em> <em>lib</em> <em>lint</em> –<em>allow</em>-<em>warnings</em>忽略警告）</p>
+
+<p>4、如果在pods中搜索不到要找的框架，前往文件夹（快捷键shift + command + G）~/Library/Caches/CocoaPods/ 中删除search_index.json文件，然后重新搜索就可以了</p>
+
+<p>在上传完成以后在cocoapods官网<a href="https://cocoapods.xn--org-928dp4do7gtu3blddxoaw0ag08ka19k108z">https://cocoapods.org暂时是搜不到你的项目的</a>，不用着急，第二天会搜到。</p>
+
+  </div><a class="u-url" href="/2019/01/10/%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6%E5%88%B0cocoapods.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">联系我</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <!-- <li class="p-name"> -->
+            <!---->
+              <!-- Maco -->
+            <!---->
+            <!-- </li> --><li class="social-media-li"><a class="u-email" href="https://www.weibo.com/u/1804548547">微博</a>&nbsp;&nbsp;&nbsp;&nbsp;</li><li class="social-media-li"><a class="u-email" href="mailto:zhang_zhifang169@163.com">邮箱</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li class="social-media-li"><a href="https://www.facebook.com/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://github.com/SuperHaiFeng"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.linkedin.com/in/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.twitter.com/Macode520"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username"></span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>©  2019 Maco  保留所有权利。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Git常用命令行总结 | Maco</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Git常用命令行总结" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="查看、添加、提交、删除、找回，重置修改文件" />
+<meta property="og:description" content="查看、添加、提交、删除、找回，重置修改文件" />
+<link rel="canonical" href="http://localhost:4000/maco/2016/11/24/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93.html" />
+<meta property="og:url" content="http://localhost:4000/maco/2016/11/24/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93.html" />
+<meta property="og:site_name" content="Maco" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-11-24T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"查看、添加、提交、删除、找回，重置修改文件","@type":"BlogPosting","url":"http://localhost:4000/maco/2016/11/24/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93.html","headline":"Git常用命令行总结","dateModified":"2016-11-24T00:00:00+08:00","datePublished":"2016-11-24T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/maco/2016/11/24/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Maco" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Maco</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Git常用命令行总结</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2016-11-24T00:00:00+08:00" itemprop="datePublished">Nov 24, 2016
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h4 id="查看添加提交删除找回重置修改文件">查看、添加、提交、删除、找回，重置修改文件</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">git help &lt;command&gt;  显示command的help</code></li>
+  <li><code class="highlighter-rouge">git show  显示某次提交的内容 git show $id</code></li>
+  <li><code class="highlighter-rouge">git co -- &lt;file&gt;  抛弃工作区修改</code></li>
+  <li><code class="highlighter-rouge">git co .  抛弃工作区修改</code></li>
+  <li><code class="highlighter-rouge">git add &lt;file&gt;  将工作文件修改提交到本地暂存区</code></li>
+  <li><code class="highlighter-rouge">git add .    --------&gt; 将所有修改过的工作文件提交暂存区</code></li>
+  <li><code class="highlighter-rouge">git rm &lt;file&gt;    --------&gt; 从版本库中删除文件</code></li>
+  <li><code class="highlighter-rouge">git rm &lt;file&gt; --cached    --------&gt; 从版本库中删除文件，但不删除文件</code></li>
+  <li><code class="highlighter-rouge">git reset &lt;file&gt;    --------&gt; 从暂存区恢复到工作文件</code></li>
+  <li><code class="highlighter-rouge">git reset -- .    --------&gt; 从暂存区恢复到工作文件</code></li>
+  <li><code class="highlighter-rouge">git reset --hard    --------&gt; 恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改</code></li>
+  <li><code class="highlighter-rouge">git ci &lt;file&gt; git ci . git ci -a    --------&gt; 将git add, git rm和git ci等操作都合并在一起做</code></li>
+  <li><code class="highlighter-rouge">git ci -am "some comments"</code></li>
+  <li><code class="highlighter-rouge">git ci --amend    --------&gt; 修改最后一次提交记录</code></li>
+  <li><code class="highlighter-rouge">git revert &lt;$id&gt;    --------&gt; 恢复某次提交的状态，恢复动作本身也创建次提交对象</code></li>
+  <li><code class="highlighter-rouge">git revert HEAD    --------&gt; 恢复最后一次提交的状态</code></li>
+</ul>
+
+<hr />
+
+<h4 id="查看文件diff">查看文件diff</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">git diff &lt;file&gt;    --------&gt; 比较当前文件和暂存区文件差异 git diff</code></li>
+  <li><code class="highlighter-rouge">git diff &lt;id1&gt;&lt;</code></li>
+  <li><code class="highlighter-rouge">id2&gt;    --------&gt; 比较两次提交之间的差异</code></li>
+  <li><code class="highlighter-rouge">git diff &lt;branch1&gt;..&lt;branch2&gt;    --------&gt; 在两个分支之间比较</code></li>
+  <li><code class="highlighter-rouge">git diff --staged    --------&gt; 比较暂存区和版本库差异</code></li>
+  <li><code class="highlighter-rouge">git diff --cached    --------&gt; 比较暂存区和版本库差异</code></li>
+  <li><code class="highlighter-rouge">git diff --stat    --------&gt; 仅仅比较统计信息</code></li>
+</ul>
+
+<h4 id="查看提交记录">查看提交记录</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">git log git log &lt;file&gt;    --------&gt; 查看该文件每次提交记录</code></li>
+  <li><code class="highlighter-rouge">git log -p &lt;file&gt;    --------&gt; 查看每次详细修改内容的diff</code></li>
+  <li><code class="highlighter-rouge">git log -p -2    --------&gt; 查看最近两次详细修改内容的diff</code></li>
+  <li><code class="highlighter-rouge">git log --stat    --------&gt;查看提交统计信息</code>
+    <h4 id="tig">tig</h4>
+  </li>
+  <li><code class="highlighter-rouge">Mac上可以使用tig代替diff和log，brew install tig</code></li>
+</ul>
+
+<h4 id="git-本地分支管理-查看切换创建和删除分支">Git 本地分支管理 查看、切换、创建和删除分支</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">git br -r    --------&gt; 查看远程分支</code></li>
+  <li><code class="highlighter-rouge">git br &lt;new_branch&gt;    --------&gt; 创建新的分支</code></li>
+  <li><code class="highlighter-rouge">git br -v    --------&gt; 查看各个分支最后提交信息</code></li>
+  <li><code class="highlighter-rouge">git br --merged    --------&gt; 查看已经被合并到当前分支的分支</code></li>
+  <li><code class="highlighter-rouge">git br --no-merged    --------&gt; 查看尚未被合并到当前分支的分支</code></li>
+  <li><code class="highlighter-rouge">git co &lt;branch&gt;    --------&gt; 切换到某个分支</code></li>
+  <li><code class="highlighter-rouge">git co -b &lt;new_branch&gt;    --------&gt; 创建新的分支，并且切换过去</code></li>
+  <li><code class="highlighter-rouge">git co -b &lt;new_branch&gt; &lt;branch&gt;    --------&gt; 基于branch创建新的new_branch</code></li>
+  <li><code class="highlighter-rouge">git co $id    --------&gt; 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除</code></li>
+  <li><code class="highlighter-rouge">git co $id -b &lt;new_branch&gt;    --------&gt; 把某次历史提交记录checkout出来，创建成一个分支</code></li>
+  <li><code class="highlighter-rouge">git br -d &lt;branch&gt;    --------&gt; 删除某个分支</code></li>
+  <li><code class="highlighter-rouge">git br -D &lt;branch&gt;    --------&gt; 强制删除某个分支 (未被合并的分支被删除的时候需要强制)</code></li>
+</ul>
+
+<h4 id="分支合并和rebase">分支合并和rebase</h4>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">git merge &lt;branch&gt;    --------&gt; 将branch分支合并到当前分支</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">git merge origin/master --no-ff    --------&gt; 不要Fast-Foward合并，这样可以生成merge提交</code></p>
+  </li>
+  <li><code class="highlighter-rouge">git rebase master &lt;branch&gt;    --------&gt; 将master rebase到branch，相当于： git co</code>
+<code class="highlighter-rouge">&lt;branch&gt; &amp;&amp; git rebase master &amp;&amp; git co master &amp;&amp; git merge &lt;branch&gt;</code>
+    <h4 id="git补丁管理方便在多台机器上开发同步时用">Git补丁管理(方便在多台机器上开发同步时用)</h4>
+  </li>
+  <li><code class="highlighter-rouge">git diff &gt; ../sync.patch    --------&gt; 生成补丁</code></li>
+  <li><code class="highlighter-rouge">git apply ../sync.patch    --------&gt; 打补丁</code></li>
+  <li><code class="highlighter-rouge">git apply --check ../sync.patch    --------&gt;测试补丁能否成功</code></li>
+</ul>
+
+<h4 id="git暂存管理">Git暂存管理</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">git stash    --------&gt; 暂存</code></li>
+  <li><code class="highlighter-rouge">git stash list    --------&gt; 列所有stash</code></li>
+  <li><code class="highlighter-rouge">git stash apply    --------&gt; 恢复暂存的内容</code></li>
+  <li><code class="highlighter-rouge">git stash drop    --------&gt; 删除暂存区</code></li>
+</ul>
+
+<h4 id="git远程分支管理">Git远程分支管理</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">git pull    --------&gt; 抓取远程仓库所有分支更新并合并到本地</code></li>
+  <li><code class="highlighter-rouge">git pull --no-ff    --------&gt; 抓取远程仓库所有分支更新并合并到本地，不要快进合并</code></li>
+  <li><code class="highlighter-rouge">git fetch origin    --------&gt; 抓取远程仓库更新</code></li>
+  <li><code class="highlighter-rouge">git merge origin/master    --------&gt; 将远程主分支合并到本地当前分支</code></li>
+  <li><code class="highlighter-rouge">git co --track origin/branch    --------&gt; 跟踪某个远程分支创建相应的本地分支</code></li>
+  <li><code class="highlighter-rouge">git co -b &lt;local_branch&gt; origin/&lt;remote_branch&gt;    --------&gt; 基于远程分支创建本地分支，功能同上</code></li>
+  <li><code class="highlighter-rouge">git push    --------&gt; push所有分支</code></li>
+  <li><code class="highlighter-rouge">git push origin master    --------&gt; 将本地主分支推到远程主分支</code></li>
+  <li><code class="highlighter-rouge">git push -u origin master    --------&gt; 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)</code></li>
+  <li><code class="highlighter-rouge">git push origin &lt;local_branch&gt;    --------&gt; 创建远程分支， origin是远程仓库名</code></li>
+  <li><code class="highlighter-rouge">git push origin &lt;local_branch&gt;:&lt;remote_branch&gt;    --------&gt; 创建远程分支</code></li>
+  <li><code class="highlighter-rouge">git push origin :&lt;remote_branch&gt;    --------&gt;先删除本地分支(git br -d</code>
+<code class="highlighter-rouge">&lt;branch&gt;)，然后再push删除远程分支</code></li>
+</ul>
+
+<h4 id="git远程仓库管理">Git远程仓库管理</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">git remote -v    --------&gt; 查看远程服务器地址和仓库名称</code></li>
+  <li><code class="highlighter-rouge">git remote show origin    --------&gt; 查看远程服务器仓库状态</code></li>
+  <li><code class="highlighter-rouge">git remote add origin git@ github:robbin/robbin_site.git    --------&gt; 添加远程仓库地址</code></li>
+  <li><code class="highlighter-rouge">git remote set-url origin git@ github.com:robbin/robbin_site.git    --------&gt;</code>
+<code class="highlighter-rouge">设置远程仓库地址(用于修改远程仓库地址) git remote rm &lt;repository&gt;    --------&gt; 删除远程仓库</code></li>
+</ul>
+
+<h4 id="创建远程仓库">创建远程仓库</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">git clone --bare robbin_site robbin_site.git    --------&gt; 用带版本的项目创建纯版本仓库</code></li>
+  <li><code class="highlighter-rouge">scp -r my_project.git git@ git.csdn.net:~    --------&gt; 将纯仓库上传到服务器上</code></li>
+  <li><code class="highlighter-rouge">mkdir robbin_site.git &amp;&amp; cd robbin_site.git &amp;&amp; git --bare init    --------&gt;</code>
+<code class="highlighter-rouge">在服务器创建纯仓库</code></li>
+  <li><code class="highlighter-rouge">git remote add origin git@ github.com:robbin/robbin_site.git    --------&gt;</code>
+<code class="highlighter-rouge">设置远程仓库地址</code></li>
+  <li><code class="highlighter-rouge">git push -u origin master    --------&gt; 客户端首次提交</code></li>
+  <li><code class="highlighter-rouge">git push -u origin develop    --------&gt; 首次将本地develop分支提交到远程develop分支，并且track</code></li>
+  <li><code class="highlighter-rouge">git remote set-head origin master    --------&gt; 设置远程仓库的HEAD指向master分支</code></li>
+  <li><code class="highlighter-rouge">也可以命令设置跟踪远程库和本地库</code></li>
+  <li><code class="highlighter-rouge">git branch --set-upstream master origin/master</code></li>
+  <li><code class="highlighter-rouge">git branch --set-upstream develop origin/develop</code></li>
+</ul>
+
+  </div><a class="u-url" href="/maco/2016/11/24/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">联系我</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <!-- <li class="p-name"> -->
+            <!---->
+              <!-- Maco -->
+            <!---->
+            <!-- </li> --><li class="social-media-li"><a class="u-email" href="https://www.weibo.com/u/1804548547">微博</a>&nbsp;&nbsp;&nbsp;&nbsp;</li><li class="social-media-li"><a class="u-email" href="mailto:zhang_zhifang169@163.com">邮箱</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li class="social-media-li"><a href="https://www.facebook.com/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://github.com/SuperHaiFeng"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.linkedin.com/in/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.twitter.com/Macode520"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username"></span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>©  2019 Maco  保留所有权利。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

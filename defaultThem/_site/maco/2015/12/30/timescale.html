@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>verilog中timesclae的使用 | Maco</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="verilog中timesclae的使用" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="描述: timescale是Verilog HDL 中的一种时间尺度预编译指令，它用来定义模块的仿真 时的时间单位和时间精度。格式如下：" />
+<meta property="og:description" content="描述: timescale是Verilog HDL 中的一种时间尺度预编译指令，它用来定义模块的仿真 时的时间单位和时间精度。格式如下：" />
+<link rel="canonical" href="http://localhost:4000/maco/2015/12/30/timescale.html" />
+<meta property="og:url" content="http://localhost:4000/maco/2015/12/30/timescale.html" />
+<meta property="og:site_name" content="Maco" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-12-30T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"描述: timescale是Verilog HDL 中的一种时间尺度预编译指令，它用来定义模块的仿真 时的时间单位和时间精度。格式如下：","@type":"BlogPosting","url":"http://localhost:4000/maco/2015/12/30/timescale.html","headline":"verilog中timesclae的使用","dateModified":"2015-12-30T00:00:00+08:00","datePublished":"2015-12-30T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/maco/2015/12/30/timescale.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Maco" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Maco</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">verilog中timesclae的使用</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2015-12-30T00:00:00+08:00" itemprop="datePublished">Dec 30, 2015
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><strong>描述:</strong>
+timescale是Verilog HDL 中的一种时间尺度预编译指令，它用来定义模块的仿真 时的时间单位和时间精度。格式如下：</p>
+
+<p>`timescale  仿真时间单位/时间精度</p>
+
+<p>注意：用于说明仿真时间单位和时间精度的 数字只能是1、10、100，不能为其它的数字。而且，时间精度不能比时间单位还要大。最多两则一样大。比如：下面定义都是对的：</p>
+
+<p>`timescale   1ns/1ps</p>
+
+<p>`timescale   100ns/100ns</p>
+
+<p>下面的定义是错的：</p>
+
+<p>`timescale  1ps/1ns</p>
+
+<p>时间精度就是模块仿真时间和延时的精确程序，比如：定义时间精度为10ns， 那么时序中所有的延时至多能精确到10ns，而8ns或者18ns是不可能做到的。
+在编译过程中,timescale指令影响这一编译器指令后面所有模块中的时延值，直至遇到另一个timescale指令resetall指令。
+在verilog中是没有默认timescale的，一个没有指定timescale的verilog模块就有可能错误的继承了前面编译模块的无效timescale参数.
+下面举个简单的例子说明一下:
+比如我们来获取一首歌曲的当前时间</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//计算当前音乐时间
+        NSTimeInterval time = self.player.currentTime.value / self.player.currentTime.timescale;
+</code></pre></div></div>
+<p>以下转载另一篇文章
+当一个设计中的多个模块带有自身的timescale编译指令时将发生什么?在这种情况下，模拟器总是定位在所有模块的最小时延精度上，并且所有时延都相应的换算为最小时延精度例如:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timescale 1ns/100ps
+MODULE AndFunc(Z,A,B);
+OUTPUT Z;
+input A,B;
+and #(5.22,6.17) AL(Z,A,B);
+endMODULE
+
+timescale 10ns/1ns
+MODULE TB;
+reg PutA,PutB;
+WHRE GetO;
+initial
+begin
+PutA = 0;
+PutB = 0;
+#5.21 PutB = 1;
+#10.4 PutA = 1;
+#15 PutB = 0;
+end
+AndFunc AF1(GetO,PutA,PutB);
+endMODULE
+</code></pre></div></div>
+
+<p>这个例子中，每个模块都有自身的timescale编译器指令。timescale编译器指令第一次应用于时延。因此在第一个模块中，5.22对应5.2ns，6.17对应6.2ns;在第二个模块中5.21对应52ns，10.4对应104ns，15对应150ns，如果仿真模块TB，设计中的所有模块最小时间精度为100ps。因此，所有延迟（特别是模块TB中的延迟）将换算成精度为100ps。延迟52ns现在对应520<em>100ps，104对应1040</em>100ps，150对应1500*100ps，更重要的是，仿真使用100ps为时间精度。如果仿真模块AndFunc，由于模块TB不是模块AndFunc的子模块，模块TB中的timescale程序指令将不再有效。</p>
+
+  </div><a class="u-url" href="/maco/2015/12/30/timescale.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">联系我</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <!-- <li class="p-name"> -->
+            <!---->
+              <!-- Maco -->
+            <!---->
+            <!-- </li> --><li class="social-media-li"><a class="u-email" href="https://www.weibo.com/u/1804548547">微博</a>&nbsp;&nbsp;&nbsp;&nbsp;</li><li class="social-media-li"><a class="u-email" href="mailto:zhang_zhifang169@163.com">邮箱</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li class="social-media-li"><a href="https://www.facebook.com/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://github.com/SuperHaiFeng"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.linkedin.com/in/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.twitter.com/Macode520"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username"></span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>©  2019 Maco  保留所有权利。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Cookie的深入理解以及在开发中的作用 | Maco</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Cookie的深入理解以及在开发中的作用" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="cookie的起源" />
+<meta property="og:description" content="cookie的起源" />
+<link rel="canonical" href="http://localhost:4000/maco/2018/12/27/cookie.html" />
+<meta property="og:url" content="http://localhost:4000/maco/2018/12/27/cookie.html" />
+<meta property="og:site_name" content="Maco" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-12-27T18:14:06+08:00" />
+<script type="application/ld+json">
+{"description":"cookie的起源","@type":"BlogPosting","url":"http://localhost:4000/maco/2018/12/27/cookie.html","headline":"Cookie的深入理解以及在开发中的作用","dateModified":"2018-12-27T18:14:06+08:00","datePublished":"2018-12-27T18:14:06+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/maco/2018/12/27/cookie.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Maco" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Maco</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Cookie的深入理解以及在开发中的作用</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-12-27T18:14:06+08:00" itemprop="datePublished">Dec 27, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h4 id="cookie的起源">cookie的起源</h4>
+
+<p>早期Web开发面临的最大问题之一是如何管理状态。简言之，服务器端没有办法知道两个请求是否来自于同一个浏览器。那时的办法是在请求的页面中插入一个token，并且在下一次请求中将这个token返回（至服务器）。这就需要在form中插入一个包含token的隐藏表单域，或着在URL的qurey字符串中传递该token。这两种办法都强调手工操作并且极易出错。</p>
+
+<p>Lou Montulli(卢·蒙特利)，那时是网景通讯的一个雇员，被认为在1994年将“magic cookies”的概念应用到了web通讯中。他意图解决的是web中的购物车，现在所有购物网站都依赖购物车。他的最早的说明文档提供了一些cookies工作原理的基本信息该文档在RFC2109中被规范化（这是所有浏览器实现cookies的参考依据），并且最终逐步形成了REF2965.Montulli最终也被授予了关于cookies的美国专利。网景浏览器在它的第一个版本中就开始支持cookies，并且当前所有web浏览器都支持cookies。</p>
+
+<p><a href="https://tools.ietf.org/html/rfc2109">RFC2109</a></p>
+
+<p><a href="https://tools.ietf.org/html/rfc2965">RFC2965</a></p>
+
+<p><a href="https://tools.ietf.org/html/rfc6265">RFC6265</a></p>
+
+<h4 id="cookie是什么">cookie是什么</h4>
+
+<p>Cookie是服务器保存在浏览器的一小段文本信息，每个 Cookie 的大小一般不能超过4KB。浏览器每次向服务器发出请求，就会自动附上这段信息。</p>
+
+<h4 id="cookie的用途">cookie的用途</h4>
+
+<ol>
+  <li>会话管理<br />
+1.1 记录用户的登录状态是cookie最常用的用途。通常web服务器会在用户登录成功后下发一个签名来标记session的有效性，这样免去了用户多次认证和登录网站。<br />
+1.2 记录用户的访问状态，例如导航啊，用户的注册流程啊。</li>
+  <li>
+    <p>个性化信息<br />
+2.1 Cookie也经常用来记忆用户相关的信息，以方便用户在使用和自己相关的站点服务。例如：ptlogin会记忆上一次登录的用户的QQ号码，这样在下次登录的时候会默认填写好这个QQ号码。<br />
+2.2 Cookie也被用来记忆用户自定义的一些功能。用户在设置自定义特征的时候，仅仅是保存在用户的浏览器中，在下一次访问的时候服务器会根据用户本地的cookie来表现用户的设置。例如google将搜索设置（使用语言、每页的条数，以及打开搜索结果的方式等等）保存在一个COOKIE里。<br /></p>
+  </li>
+  <li>记录用户的行为<br />
+最典型的是公司的TCSS系统。它使用Cookie来记录用户的点击流和某个产品或商业行为的操作率和流失率。当然功能可以通过IP或http header中的referrer实现，但是Cookie更精准一些。</li>
+</ol>
+
+<h4 id="创建cookie">创建cookie</h4>
+
+<p>服务器如果希望在浏览器保存 Cookie，就要在 HTTP 回应的头信息里面，放置一个<code class="highlighter-rouge">Set-Cookie</code>字段。Set-Cookie消息的格式如下面的字符串（中括号中的部分都是可选的）。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Cookie:name=value [ ;expires=date][ ;max-age=time][ ;domain=domain][ ;path=path][ ;secure][ ;httponly]
+</code></pre></div></div>
+
+<p>上面可选的字段是Cookie的属性，一个<code class="highlighter-rouge">Set-Cookie</code>字段里面，可以同时包括多个属性，没有次序的要求。如下一个例子：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
+</code></pre></div></div>
+
+<p>如果服务器想改变一个早先设置的 Cookie，必须同时满足四个条件：Cookie 的<code class="highlighter-rouge">key</code>、<code class="highlighter-rouge">domain</code>、<code class="highlighter-rouge">path</code>和<code class="highlighter-rouge">secure</code>都匹配。只要有一个属性不同，就会生成一个全新的 Cookie，而不是替换掉原来那个 Cookie。举例来说，如果原始的 Cookie 是用如下的<code class="highlighter-rouge">Set-Cookie</code>设置的。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Cookie: key1=value1; domain=example.com; path=/blog
+</code></pre></div></div>
+
+<p>改变上面这个 Cookie 的值，就必须使用同样的<code class="highlighter-rouge">Set-Cookie</code>。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-Cookie: key1=value2; domain=example.com; path=/blog
+</code></pre></div></div>
+
+<p>HTTP 回应可以包含多个<code class="highlighter-rouge">Set-Cookie</code>字段，即在浏览器生成多个 Cookie，如下。</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-type</span><span class="p">:</span> <span class="s">text/html</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">yummy_cookie=choco</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">tasty_cookie=strawberry</span>
+</code></pre></div></div>
+
+<h4 id="cookie的属性">cookie的属性</h4>
+
+<h5 id="expiresmax-age">Expires，Max-Age</h5>
+
+<p><code class="highlighter-rouge">Expires</code>属性指定一个具体的到期时间，到了指定时间以后，浏览器就不再保留这个 Cookie。它的值是 UTC 格式。可以通过设置它的<code class="highlighter-rouge">expires</code>属性为一个过去的日期来删除这个cookie。</p>
+
+<p><code class="highlighter-rouge">Max-Age</code>属性指定从现在开始 Cookie 存在的秒数，比如<code class="highlighter-rouge">60 * 60 * 24 * 365</code>（即一年）。过了这个时间以后，浏览器就不再保留这个 Cookie。</p>
+
+<p>如果同时指定了<code class="highlighter-rouge">Expires</code>和<code class="highlighter-rouge">Max-Age</code>，那么<code class="highlighter-rouge">Max-Age</code>的值将优先生效。</p>
+
+<p>如果<code class="highlighter-rouge">Set-Cookie</code>字段没有指定<code class="highlighter-rouge">Expires</code>或<code class="highlighter-rouge">Max-Age</code>属性，那么这个 Cookie 就是 Session Cookie，即它只在本次对话存在，一旦用户关闭浏览器，浏览器就不会再保留这个 Cookie。</p>
+
+<h5 id="domain">Domain</h5>
+
+<p><code class="highlighter-rouge">Domain</code>属性指定浏览器发出 HTTP 请求时，哪些域名要附带这个 Cookie。如果没有指定该属性，浏览器会默认将其设为当前 URL 的一级域名，比如<code class="highlighter-rouge">www.example.com</code>会设为<code class="highlighter-rouge">.example.com</code>，而且以后如果访问<code class="highlighter-rouge">.example.com</code>的任何子域名，HTTP 请求也会带上这个 Cookie。如果服务器在<code class="highlighter-rouge">Set-Cookie</code>字段指定的域名，不属于当前域名，浏览器会拒绝这个 Cookie。</p>
+
+<p>RFC2109规定domain必须满足以.开头。</p>
+
+<h5 id="path">Path</h5>
+
+<p><code class="highlighter-rouge">Path</code>属性指定浏览器发出 HTTP 请求时，哪些路径要附带这个 Cookie。只要浏览器发现，<code class="highlighter-rouge">Path</code>属性是 HTTP 请求路径的开头一部分，就会在头信息里面带上这个 Cookie。比如，<code class="highlighter-rouge">PATH</code>属性是<code class="highlighter-rouge">/</code>，那么请求<code class="highlighter-rouge">/docs</code>路径也会包含该 Cookie。当然，前提是域名必须一致。path属性的默认值是发送Set-Cookie消息头所对应的URL中的path部分。</p>
+
+<h5 id="secure">Secure</h5>
+
+<p><code class="highlighter-rouge">Secure</code>属性指定浏览器只有在加密协议 HTTPS 下，才能将这个 Cookie 发送到服务器，以确保cookie在从客户端传递到Server的过程中始终加密的。该属性只是一个开关，不需要指定值。如果通信是 HTTPS 协议，该开关自动打开。</p>
+
+<h5 id="httponly">HttpOnly</h5>
+
+<p><code class="highlighter-rouge">HttpOnly</code>属性指定该 Cookie 无法通过 JavaScript 脚本拿到，主要是<code class="highlighter-rouge">Document.cookie</code>属性、<code class="highlighter-rouge">XMLHttpRequest</code>对象和 Request API 都拿不到该属性。这样就防止了该 Cookie 被脚本读到，只有浏览器发出 HTTP 请求时，才会带上该 Cookie。</p>
+
+<h4 id="发送cookie">发送cookie</h4>
+
+<p>当一个cookie存在，并且可选条件允许的话，该cookie的值会在接下来的每个请求中被发送至服务器。cookie的值被存储在名为Cookie的HTTP消息头中，例如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cookie : name=value
+</code></pre></div></div>
+
+<p>如果在指定的请求中有多个cookies，那么它们会被分号和空格分开，例如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cookie:name1=value1 ; name2=value2 ; name3=value3
+</code></pre></div></div>
+
+<h4 id="cookie缺陷">Cookie缺陷</h4>
+
+<ol>
+  <li>
+    <p>Cookie会被附加在每个HTTP请求中，所以无形中增加了流量。</p>
+  </li>
+  <li>由于在HTTP请求中的Cookie是明文传递的，所以安全性成问题，除非用HTTPS。</li>
+  <li>Cookie的大小限制在4KB左右，对于复杂的存储需求来说是不够用的。</li>
+  <li>状态不一致，后退导致cookie不会重置。</li>
+</ol>
+
+<h3 id="cookie在android中的使用">Cookie在Android中的使用</h3>
+
+<p><strong>Cookie持久化</strong></p>
+
+<p>持久化保存cookie有很多方式，可以用数据库，可以用文件，SharedPreferences，还可以保存到系统Webview的CookieManager里（其实也是个数据库）。</p>
+
+<p>如果我们自己本地保存cookie，要做好本地Cookie和Webview的cookie同步，所以最好的办法是保存到系统Webview的CookieManager里，取的时候从Webview的CookieManager里取。</p>
+
+<p>例子：</p>
+
+<p><a href="https://github.com/franmontiel/PersistentCookieJar">https://github.com/franmontiel/PersistentCookieJar</a></p>
+
+<p>A persistent CookieJar implementation for OkHttp 3 based on SharedPreferences.</p>
+
+<h4 id="okhttp3-中实现-cookie-持久化管理">OkHttp3 中实现 Cookie 持久化管理</h4>
+
+<p>3.0之后OKHttp是加了CookieJar和Cookie两个类的，通过实现CookieJar即可管理cookie。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">class</span> <span class="nc">CookiesManager</span> <span class="kd">implements</span> <span class="n">CookieJar</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">PersistentCookieStore</span> <span class="n">cookieStore</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersistentCookieStore</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">());</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveFromResponse</span><span class="o">(</span><span class="n">HttpUrl</span> <span class="n">url</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Cookie</span><span class="o">&gt;</span> <span class="n">cookies</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cookies</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cookies</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Cookie</span> <span class="n">item</span> <span class="o">:</span> <span class="n">cookies</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">cookieStore</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">item</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Cookie</span><span class="o">&gt;</span> <span class="nf">loadForRequest</span><span class="o">(</span><span class="n">HttpUrl</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Cookie</span><span class="o">&gt;</span> <span class="n">cookies</span> <span class="o">=</span> <span class="n">cookieStore</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">cookies</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">OkHttpClient</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">.</span><span class="na">Builder</span><span class="o">();</span>
+<span class="n">builder</span><span class="o">.</span><span class="na">cookieJar</span><span class="o">(</span><span class="k">new</span> <span class="n">CookiesManager</span><span class="o">());</span>
+</code></pre></div></div>
+
+<h4 id="webview中的cookie机制">WebView中的Cookie机制</h4>
+
+<p>WebView是基于webkit内核的UI控件，相当于一个浏览器客户端。它会在本地维护每次会话的cookie(保存在data/data/package_name/app_WebView/Cookies)。</p>
+
+<p><img src="../images/image-20180914150451187.png" alt="cookie目录" /></p>
+
+<p>当WebView加载URL的时候,WebView会从本地读取该URL对应的cookie，并携带该cookie与服务器进行通信。WebView通过android.webkit.CookieManager类来维护cookie。CookieManager是 WebView的cookie管理类。</p>
+
+<p>之前同步cookie需要用到CookieSyncManager类，现在这个类已经被deprecated。如今WebView已经可以在需要的时候自动同步cookie了。</p>
+
+<p><strong>CookieSyncManager</strong></p>
+
+<p>在SDK21以下，使用CookieSyncManager在内存和存储器之间同步浏览器的cookie。另外CookieSyncManager同步策略是在一个独立的线程里定时进行同步。</p>
+
+<ol>
+  <li>
+    <p>cookie开始同步：注意每次同步的时间间隔是5分钟</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">createInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span> 
+<span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">startSync</span><span class="o">();</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>cookie停止同步：</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">stopSync</span><span class="o">()</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>cookie立即同步：调用了该方法会立即进行cookie的同步，代码如下：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//一般是在webview中的onPageFinished(WebView, String)方法进行强制同步
+CookieSyncManager.getInstance().sync()
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>删除cookie操作：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CookieSyncManager.createInstance(this); 
+CookieManager.getInstance().removeAllCookie(); CookieManager.getInstance().removeSessionCookie(); CookieSyncManager.getInstance().sync(); 
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>CookieManager</strong></p>
+
+<p>从sdk21之后，webview已经内置了cookie的同步操作了。</p>
+
+<p>删除所有Cookie</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">removeAllCookies</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> 
+<span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">flush</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>保存Cookie</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CookieManager.getInstance().setCookie(String url, String value)
+</code></pre></div></div>
+
+<p>获取Cookie</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CookieManager.getInstance().getCookie(url)
+</code></pre></div></div>
+
+<p>综合两个Manager, 最后写法：</p>
+
+<p>同步Cookie</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">createInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> 
+<span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&lt;</span> <span class="mi">21</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+	<span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">flush</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>删除所有Cookie</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">createInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> 
+<span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">removeAllCookie</span><span class="o">();</span> <span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">removeSessionCookie</span><span class="o">();</span> 
+<span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&lt;</span> <span class="mi">21</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+	<span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">flush</span><span class="o">();</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h3 id="cookie在ios中的使用">Cookie在iOS中的使用</h3>
+
+<h5 id="cookie获取和存储">Cookie获取和存储</h5>
+
+<p>NSHTTPCookieStorage会自动存储NSHttpRequest的所有请求产生的cookie，需要删除的时候我们会手动移除cookie。</p>
+
+<h5 id="cookie的内容">Cookie的内容</h5>
+
+<p>cookie 中包含了一个由 名字 = 值 （name=value） 这样的信息构成的任意列表</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CM_S=v1_2_b91cf9ddaaf767e7a986cd509d66806c; expires=Fri, 12-Oct-2018 19:00:00 GMT; path=/; domain=charminginsurance.cn; httponly
+</code></pre></div></div>
+
+<h5 id="cookie的手动管理">Cookie的手动管理</h5>
+
+<p>cookie的手动主要有添加和删除两中，从服务器获取到cookie后，会将cookie存在本地，给请求头添加cookie。本地cookie不能使用或者用户退出登录，会将存在本地cookie清除，同时清空缓存。</p>
+
+<pre><code class="language-objective-c">//添加Cookie
+[NetTools.requestSerializer setValue:netCookie forHTTPHeaderField:@"cookie"];
+NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:cookie forKey:COOKIE_KEY];
+    [userDefault synchronize];
+</code></pre>
+
+<pre><code class="language-objective-c">//清除本地和afn的cookie 和缓存
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault removeObjectForKey:COOKIE_KEY];
+    NSArray *arrOfCookie = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:BaseURL]];
+    LCLog(@"%lu",(unsigned long)arrOfCookie.count);
+    for (NSHTTPCookie *cookie in arrOfCookie)
+    {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    [userDefault synchronize];
+    NetTools.netCookie = nil;
+</code></pre>
+
+<h4 id="uiweview和wkwebview中的cookie使用">UIWeview和WKWebview中的Cookie使用</h4>
+
+<p>UIWebView会将NSHttpRequest的所有请求产生的cookie自动保存，并且，在同一个app内多个UIWebView之间共享，不需要我们做任何操作。</p>
+
+<p>WKWebView不会和NSHttpRequest共享cookie，因此，如果登录接口用AFN，那么WKWebView是读取不到登录之后的cookie的。需要手动添加cookie。</p>
+
+<p>WKWebView中，只有使用了同一个WKProcessPool的WKWebView，才会共享cookie在单例中，创建一个WKProcessPool单例对象，讲WKwebview的processPool属性设置为同一个就可以了。</p>
+
+
+  </div><a class="u-url" href="/maco/2018/12/27/cookie.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">联系我</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <!-- <li class="p-name"> -->
+            <!---->
+              <!-- Maco -->
+            <!---->
+            <!-- </li> --><li class="social-media-li"><a class="u-email" href="https://www.weibo.com/u/1804548547">微博</a>&nbsp;&nbsp;&nbsp;&nbsp;</li><li class="social-media-li"><a class="u-email" href="mailto:zhang_zhifang169@163.com">邮箱</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li class="social-media-li"><a href="https://www.facebook.com/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://github.com/SuperHaiFeng"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.linkedin.com/in/MacoZhang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username"></span></a></li><li class="social-media-li"><a href="https://www.twitter.com/Macode520"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username"></span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>©  2019 Maco  保留所有权利。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

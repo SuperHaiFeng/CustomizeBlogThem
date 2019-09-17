@@ -1,0 +1,1570 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-13T17:04:09+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Maco</title><subtitle>©  2019 Maco  保留所有权利。</subtitle><entry><title type="html">二维码原理以及生成</title><link href="http://localhost:4000/2019/03/13/qrcode.html" rel="alternate" type="text/html" title="二维码原理以及生成" /><published>2019-03-13T00:00:00+08:00</published><updated>2019-03-13T00:00:00+08:00</updated><id>http://localhost:4000/2019/03/13/qrcode</id><content type="html" xml:base="http://localhost:4000/2019/03/13/qrcode.html">&lt;h2 id=&quot;二维码&quot;&gt;二维码&lt;/h2&gt;
+
+&lt;h3 id=&quot;一简介&quot;&gt;一、简介&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;又称二维条码，它是用特定的几何图形按一定规律在平面（二维方向）上分布的黑白相间的图形。相比一维的条码，二维码能够在横向和纵向两个方位同时表达信息，因此能在很小的面积内表达大量的信息，同时可以有较高的容错能力。最初在1994年由日本DENSO WAVE公司腾弘原团队发明，后来DENSO WAVE 公司宣布，不行使本公司就标准QR码拥有的专利权(专利第2938338号)，目前，QR码已经在国家标准和国际标准中实现标准化，任何人都可以随意查看该标准。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;11-二维码分类&quot;&gt;1.1 二维码分类&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;堆叠式/行排式二维条码&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;其编码原理是建立在一维条码基础之上，按需要堆积成二行或多行。它在编码设计、校验原理、识读方式等方面继承了一维条码的一些特点，但由于行数的增加，需要对行进行判定，其译码算法不完全相同于一维条码。有代表性的行排式二维条码有：Code 16K、Code 49、PDF417、MicroPDF417 等。&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;矩阵式二维码&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;最流行的就是QR CODE ,我们常说的二维码大多数都是他。在矩阵相应元素位置上，用点（方点、圆点或其他形状）的出现表示二进制“1”，点的不出现表示二进制的“0”，点的排列组合确定了矩阵式二维条码所代表的意义。矩阵式二维条码是建立在计算机图像处理技术、组合编码原理等基础上的一种新型图形符号自动识读处理码制。具有代表性的矩阵式二维条码有：Code One、MaxiCode、QR Code、 Data Matrix、Han Xin Code、Grid Matrix 等。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/pdf417-qrcode.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;QRCode官网：www.qrcode.com&lt;/p&gt;
+
+&lt;h4 id=&quot;12-二维码的特点&quot;&gt;1.2 二维码的特点&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;存储大容量信息&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;传统条形码最多只能支持20位左右的信息，二维码则最多可以支持7089个数字，4296个字母，1817个汉字。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/performanceImage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;小空间内打印&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/duibi.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;有效表现各种字母&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;QR码是日本国产的二维码，因此更适合处理日文字母和汉字。QR码字集规格定义是按照日本标准“JIS第一级和第二级的汉字”制定的，因此在日语处理方面，每一个全角字母和汉字都用13比特的数据处理，效率较高，与其他二维码相比，可以多存储20%以上的信息。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/goodnight.png&quot; alt=&quot;o ya su mi na sai&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;抗破损能力强&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;QR码具备“纠错功能”，即使部分编码变脏或破损，也可以恢复数据。数据恢复以码字为单位（是组成内部数据的单位，在QR码的情况下，每8比特代表1码字），最多可以纠错约30%（根据变脏和破损程度的不同，也存在无法恢复的情况）。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;img src=&quot;.../../../../assets/qrcode/damageImage.png&quot; alt=&quot;damageImage&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;任意方向识别&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;QR码从360°任一方向均可快速读取。原因在于QR码中的3处定位图案，可以帮助QR码不受背景样式的影响，实现快速稳定的读取。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/symbolImage.png&quot; alt=&quot;symbolImage&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;支持数据合并功能&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;QR码可以将数据分割为多个编码，最多支持16个QR码。使用这一功能，还可以在狭长区域内打印QR码。另外，也可以把多个分割编码合并为单个数据。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/commonDataImage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;13二维码的版本与纠错能力&quot;&gt;1.3二维码的版本与纠错能力&lt;/h4&gt;
+
+&lt;h5 id=&quot;131二维码版本&quot;&gt;1.3.1二维码版本&lt;/h5&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二维码一共有40个尺寸，官方叫版本Version。Version 1是21 x 21的矩阵，Version 2是 25 x 25的矩阵，Version 3是29的尺寸，每增加一个version，就会增加4的尺寸，公式是：(V-1)&lt;em&gt;4 + 21（V是版本号） 最高Version 40，(40-1)&lt;/em&gt;4+21 = 177，所以最高是177 x 177 的正方形。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/versionVarietyImage.png&quot; alt=&quot;version&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;132-二维码纠错能力&quot;&gt;1.3.2 二维码纠错能力&lt;/h5&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;QR码具有“纠错功能”。即使编码变脏或破损，也可自动恢复数据。这一“纠错能力”具备4个级别，用户可根据使用环境选择相应的级别。调高级别，纠错能力也相应提高，但由于数据量会随之增加，编码尺寸也也会变大。 
+用户应综合考虑使用环境、编码尺寸等因素后选择相应的级别。 在工厂等容易沾染赃物的环境下，可以选择级别Q或H，在不那么脏的环境下，且数据量较多的时候，也可以选择级别L。一般情况下用户大多选择级别M(15%)。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Qrcode_jiucuo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;纠错使用RS编码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;RS编码，又称里所码，即Reed-solomon codes，是一种前向纠错的信道编码，对由校正过采样数据所产生的多项式有效。当接收器正确的收到足够的点后，它就可以恢复原来的多项式，即使接收到的多项式上有很多点被噪声干扰失真。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;133-二维码尺寸选择&quot;&gt;1.3.3 二维码尺寸选择&lt;/h5&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;QR码的各个版本结合数据量、字符类型和纠错级别，均设有相对应的最多输入字符数。也就是说，如果增加数据量，则需要使用更多的码元来组成QR码，QR码就会变得更大。&lt;/p&gt;
+
+  &lt;p&gt;例如，需要输入的数据为100位的数字时，通过以下步骤来选定。 
+1．假设要输入的数据种类为“数字” 。
+2．从“L”、 “M”、 “Q”、 “H”中选择纠错级别。（假设选择“M”） 
+3．查看下表，先从数字列找出数字为100以上且接近100的，其次找出纠错级别“M”，两者交叉的部分就是最佳版本。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/select_version.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;14-二维码的构成&quot;&gt;1.4 二维码的构成&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/qrcode_explain.png&quot; alt=&quot;二维码构成&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;位置探测图形、位置探测图形分隔符、定位图形：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;用于对二维码的定位，对每个QR码来说，位置都是固定存在的，只是大小规格会有所差异； 这三个定位图案有白边即位置探测图形分隔符，之所以三个而不是四个，因为三个就可以标识一个矩形了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;校正图形&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;规格确定，校正图形的数量和位置也就确定了，Version 2以上（包括Version2）的二维码才需要这个。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;格式信息&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;表示该二维码的纠错级别，分为L、M、Q、H，存在于所有的尺寸中，用于存放一些格式化数据的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;版本信息&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;即二维码的规格，QR码符号共有40种规格的矩阵（一般为黑白色），从21x21（版本1），到177x177（版本40），每一版本符号比前一版本 每边增加4个模块。在 &amp;gt;= Version 7以上，需要预留两块3 x 6的区域存放一些版本信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;数据和纠错码字&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;实际保存的二维码信息，和纠错码字（用于修正二维码损坏带来的错误）。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;二二维码的生成过程&quot;&gt;二、二维码的生成过程&lt;/h3&gt;
+
+&lt;h4 id=&quot;21编码过程&quot;&gt;2.1编码过程&lt;/h4&gt;
+
+&lt;h5 id=&quot;211编码类型&quot;&gt;2.1.1编码类型&lt;/h5&gt;
+
+&lt;p&gt;QR码支持数字编码、字符编码、字节编码、日文编码、特殊字符编码、混合编码等。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;数字编码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;从0到9。如果需要编码的数字的个数不是3的倍数，那么，最后剩下的1或2位数会被转成4或7bits，则其它的每3位数字会被编成 10，12，14bits，编成多长还要看二维码的尺寸。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;字符编码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;包括 0-9，大写的A到Z（没有小写），以及符号$ % * + – . / : 包括空格。这些字符会映射成一个字符索引表。如下所示：（其中的SP是空格，Char是字符，Value是其索引值） 编码的过程是把字符两两分组，然后转成下表的45进制，然后转成11bits的二进制，如果最后有一个落单的，那就转成6bits的二进制。而编码模式和字符的个数需要根据不同的Version尺寸编成9, 11或13个二进制（如下表中Table 3）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Alphanumeric-mode.png&quot; alt=&quot;编码&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Mode-Indicator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;212字符编码示例&quot;&gt;2.1.2字符编码示例：&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一、生成数据码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在Version 1的尺寸下，纠错级别为H的情况下，编码: AC-42&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;从字符索引表中找到 AC-42 这五个字条的索引 (10,12,41,4,2)&lt;/li&gt;
+    &lt;li&gt;两两分组: (10,12) (41,4) (2)&lt;/li&gt;
+    &lt;li&gt;把每一组转成11bits的二进制:&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;(10,12) 10x45+12 等于 462 转成 00111001110
+(41,4) 41x45+4 等于 1849 转成 11100111001
+(2) 等于 2 转成 000010&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;把这些二进制连接起来：00111001110 11100111001 000010&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;把字符的个数转成二进制 (Version 1-H为9 bits ): 5个字符，5转成 000000101&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;在头上加上编码标识 0010 和第5步的个数编码:  0010 000000101 00111001110 11100111001 000010&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;添加结束符0000&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;8bits重排，如果所有的编码加起来不是8个倍数我们还要在后面加上足够的0，比如上面一共有78个bits，所以，我们还要加上2个0，然后按8个bits分好组 00100000 00101001 11001110 11100111 00100001 00000000&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;补齐码，最后，如果如果还没有达到我们最大的bits数的限制，我们还要加一些补齐码（Padding Bytes），Padding Bytes就是重复下面的两个bytes：11101100 00010001 关于每一个Version的每一种纠错级别的最大Bits限制，可以参看[QR Code Spec]的第28页到32页的Table-7一表。&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;按照最低21*21H级别纠错规格72个bits,一共需要9组 还差三个，补齐后即可得到数据码：00100000 00101001 11001110 11100111 00100001 00000000 11101100 00010001 11101100&lt;/p&gt;
+
+  &lt;p&gt;上面的编码就是数据码了，叫Data Codewords，每一个8bits叫一个codeword，我们还要对这些数据码加上纠错信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;二、通过数据码生成纠错码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;首先，我们需要对数据码进行分组，也就是分成不同的Block，然后对各个Block进行纠错编码，对于如何分组，我们可以查看[QR Code Spec]的第33页到44页的Table-13到Table-22的定义表。注意最后两列：&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Number of Error Code Correction Blocks&lt;/strong&gt; ：需要分多少个块&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Error Correction Code Per Blocks&lt;/strong&gt;：每一个块中的code个数，所谓的code的个数，也就是有多少个8bits的字节。&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Error-Correction-Blocks.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+  &lt;p&gt;例如：上述的Version 5 + Q纠错级：需要4个Blocks（2个Blocks为一组，共两组），头一组的两个Blocks中各15个bits数据 + 各 9个bits的纠错码（注：表中的codewords就是一个8bits的byte）&lt;/p&gt;
+
+  &lt;p&gt;下图给一个5-Q的示例（因为二进制写起来会让表格太大，所以，我都用了十进制，我们可以看到每一块的纠错码有18个codewords，也就是18个8bits的二进制数）&lt;/p&gt;
+
+  &lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/jiucuo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+  &lt;p&gt;注：二维码的纠错码主要是通过&lt;a href=&quot;http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction&quot;&gt;Reed-Solomon error correction&lt;/a&gt;（里德-所罗门纠错算法）来实现的。&lt;/p&gt;
+
+  &lt;p&gt;可参考：https://blog.csdn.net/liubin1991liubin/article/details/78989043&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;三、最终编码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;二维码的混乱技术还没有玩完，它还要把数据码和纠错码的各个codewords交替放在一起。如何交替呢，规则如下：&lt;/p&gt;
+
+  &lt;p&gt;对于数据码：把每个块的第一个codewords先拿出来按顺度排列好，然后再取第一块的第二个，如此类推。假如我们用HELLO WORLD的字符串的数据码：&lt;/p&gt;
+
+  &lt;p&gt;00100000 01011011 00001011 01111000 11010001 01110010 11011100 01001101 01000011 01000000 &lt;strong&gt;11101100 00010001 11101100&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;Data Codewords如下：&lt;/p&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;块 1&lt;/th&gt;
+        &lt;th&gt;67&lt;/th&gt;
+        &lt;th&gt;85&lt;/th&gt;
+        &lt;th&gt;70&lt;/th&gt;
+        &lt;th&gt;134&lt;/th&gt;
+        &lt;th&gt;87&lt;/th&gt;
+        &lt;th&gt;38&lt;/th&gt;
+        &lt;th&gt;85&lt;/th&gt;
+        &lt;th&gt;194&lt;/th&gt;
+        &lt;th&gt;119&lt;/th&gt;
+        &lt;th&gt;50&lt;/th&gt;
+        &lt;th&gt;6&lt;/th&gt;
+        &lt;th&gt;18&lt;/th&gt;
+        &lt;th&gt;6&lt;/th&gt;
+        &lt;th&gt;103&lt;/th&gt;
+        &lt;th&gt;38&lt;/th&gt;
+        &lt;th&gt; &lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;块 2&lt;/td&gt;
+        &lt;td&gt;246&lt;/td&gt;
+        &lt;td&gt;246&lt;/td&gt;
+        &lt;td&gt;66&lt;/td&gt;
+        &lt;td&gt;7&lt;/td&gt;
+        &lt;td&gt;118&lt;/td&gt;
+        &lt;td&gt;134&lt;/td&gt;
+        &lt;td&gt;242&lt;/td&gt;
+        &lt;td&gt;7&lt;/td&gt;
+        &lt;td&gt;38&lt;/td&gt;
+        &lt;td&gt;86&lt;/td&gt;
+        &lt;td&gt;22&lt;/td&gt;
+        &lt;td&gt;198&lt;/td&gt;
+        &lt;td&gt;199&lt;/td&gt;
+        &lt;td&gt;146&lt;/td&gt;
+        &lt;td&gt;6&lt;/td&gt;
+        &lt;td&gt; &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;块 3&lt;/td&gt;
+        &lt;td&gt;182&lt;/td&gt;
+        &lt;td&gt;230&lt;/td&gt;
+        &lt;td&gt;247&lt;/td&gt;
+        &lt;td&gt;119&lt;/td&gt;
+        &lt;td&gt;50&lt;/td&gt;
+        &lt;td&gt;7&lt;/td&gt;
+        &lt;td&gt;118&lt;/td&gt;
+        &lt;td&gt;134&lt;/td&gt;
+        &lt;td&gt;87&lt;/td&gt;
+        &lt;td&gt;38&lt;/td&gt;
+        &lt;td&gt;82&lt;/td&gt;
+        &lt;td&gt;6&lt;/td&gt;
+        &lt;td&gt;134&lt;/td&gt;
+        &lt;td&gt;151&lt;/td&gt;
+        &lt;td&gt;50&lt;/td&gt;
+        &lt;td&gt;7&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;块 4&lt;/td&gt;
+        &lt;td&gt;70&lt;/td&gt;
+        &lt;td&gt;247&lt;/td&gt;
+        &lt;td&gt;118&lt;/td&gt;
+        &lt;td&gt;86&lt;/td&gt;
+        &lt;td&gt;194&lt;/td&gt;
+        &lt;td&gt;6&lt;/td&gt;
+        &lt;td&gt;151&lt;/td&gt;
+        &lt;td&gt;50&lt;/td&gt;
+        &lt;td&gt;16&lt;/td&gt;
+        &lt;td&gt;236&lt;/td&gt;
+        &lt;td&gt;17&lt;/td&gt;
+        &lt;td&gt;236&lt;/td&gt;
+        &lt;td&gt;17&lt;/td&gt;
+        &lt;td&gt;236&lt;/td&gt;
+        &lt;td&gt;17&lt;/td&gt;
+        &lt;td&gt;236&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;p&gt;先竖再横向：67， 246， 182， 70， 85，246，230 ，247 ………  ……… ，38，6，50，17，7，236&lt;/p&gt;
+
+  &lt;p&gt;对于纠错码，也是一样：&lt;/p&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;块 1&lt;/th&gt;
+        &lt;th&gt;213&lt;/th&gt;
+        &lt;th&gt;199&lt;/th&gt;
+        &lt;th&gt;11&lt;/th&gt;
+        &lt;th&gt;45&lt;/th&gt;
+        &lt;th&gt;115&lt;/th&gt;
+        &lt;th&gt;247&lt;/th&gt;
+        &lt;th&gt;241&lt;/th&gt;
+        &lt;th&gt;223&lt;/th&gt;
+        &lt;th&gt;229&lt;/th&gt;
+        &lt;th&gt;248&lt;/th&gt;
+        &lt;th&gt;154&lt;/th&gt;
+        &lt;th&gt;117&lt;/th&gt;
+        &lt;th&gt;154&lt;/th&gt;
+        &lt;th&gt;111&lt;/th&gt;
+        &lt;th&gt;86&lt;/th&gt;
+        &lt;th&gt;161&lt;/th&gt;
+        &lt;th&gt;111&lt;/th&gt;
+        &lt;th&gt;39&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;块 2&lt;/td&gt;
+        &lt;td&gt;87&lt;/td&gt;
+        &lt;td&gt;204&lt;/td&gt;
+        &lt;td&gt;96&lt;/td&gt;
+        &lt;td&gt;60&lt;/td&gt;
+        &lt;td&gt;202&lt;/td&gt;
+        &lt;td&gt;182&lt;/td&gt;
+        &lt;td&gt;124&lt;/td&gt;
+        &lt;td&gt;157&lt;/td&gt;
+        &lt;td&gt;200&lt;/td&gt;
+        &lt;td&gt;134&lt;/td&gt;
+        &lt;td&gt;27&lt;/td&gt;
+        &lt;td&gt;129&lt;/td&gt;
+        &lt;td&gt;209&lt;/td&gt;
+        &lt;td&gt;17&lt;/td&gt;
+        &lt;td&gt;163&lt;/td&gt;
+        &lt;td&gt;163&lt;/td&gt;
+        &lt;td&gt;120&lt;/td&gt;
+        &lt;td&gt;133&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;块 3&lt;/td&gt;
+        &lt;td&gt;148&lt;/td&gt;
+        &lt;td&gt;116&lt;/td&gt;
+        &lt;td&gt;177&lt;/td&gt;
+        &lt;td&gt;212&lt;/td&gt;
+        &lt;td&gt;76&lt;/td&gt;
+        &lt;td&gt;133&lt;/td&gt;
+        &lt;td&gt;75&lt;/td&gt;
+        &lt;td&gt;242&lt;/td&gt;
+        &lt;td&gt;238&lt;/td&gt;
+        &lt;td&gt;76&lt;/td&gt;
+        &lt;td&gt;195&lt;/td&gt;
+        &lt;td&gt;230&lt;/td&gt;
+        &lt;td&gt;189&lt;/td&gt;
+        &lt;td&gt;10&lt;/td&gt;
+        &lt;td&gt;108&lt;/td&gt;
+        &lt;td&gt;240&lt;/td&gt;
+        &lt;td&gt;192&lt;/td&gt;
+        &lt;td&gt;141&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;块 4&lt;/td&gt;
+        &lt;td&gt;235&lt;/td&gt;
+        &lt;td&gt;159&lt;/td&gt;
+        &lt;td&gt;5&lt;/td&gt;
+        &lt;td&gt;173&lt;/td&gt;
+        &lt;td&gt;24&lt;/td&gt;
+        &lt;td&gt;147&lt;/td&gt;
+        &lt;td&gt;59&lt;/td&gt;
+        &lt;td&gt;33&lt;/td&gt;
+        &lt;td&gt;106&lt;/td&gt;
+        &lt;td&gt;40&lt;/td&gt;
+        &lt;td&gt;255&lt;/td&gt;
+        &lt;td&gt;172&lt;/td&gt;
+        &lt;td&gt;82&lt;/td&gt;
+        &lt;td&gt;2&lt;/td&gt;
+        &lt;td&gt;131&lt;/td&gt;
+        &lt;td&gt;32&lt;/td&gt;
+        &lt;td&gt;178&lt;/td&gt;
+        &lt;td&gt;236&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;p&gt;和数据码取的一样，得到：213，87，148，235，199，204，116，159，…… …… 39，133，141，236&lt;/p&gt;
+
+  &lt;p&gt;然后，再把这两组放在一起（纠错码放在数据码之后）得到：&lt;/p&gt;
+
+  &lt;p&gt;67, 246, 182, 70, 85, 246, 230, 247, 70, 66, 247, 118, 134, 7, 119, 86, 87, 118, 50, 194, 38, 134, 7, 6, 85, 242, 118, 151, 194, 7, 134, 50, 119, 38, 87, 16, 50, 86, 38, 236, 6, 22, 82, 17, 18, 198, 6, 236, 6, 199, 134, 17, 103, 146, 151, 236, 38, 6, 50, 17, 7, 236, 213, 87, 148, 235, 199, 204, 116, 159, 11, 96, 177, 5, 45, 60, 212, 173, 115, 202, 76, 24, 247, 182, 133, 147, 241, 124, 75, 59, 223, 157, 242, 33, 229, 200, 238, 106, 248, 134, 76, 40, 154, 27, 195, 255, 117, 129, 230, 172, 154, 209, 189, 82, 111, 17, 10, 2, 86, 163, 108, 131, 161, 163, 240, 32, 111, 120, 192, 178, 39, 133, 141, 236&lt;/p&gt;
+
+  &lt;p&gt;这就是我们的数据区。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;22-绘制二维码&quot;&gt;2.2 绘制二维码&lt;/h4&gt;
+
+&lt;p&gt;先看之前这个图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/qrcode_explain.png&quot; alt=&quot;二维码构成&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;一、添加位置探测图形&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;首先，先把位置探测图形图案画在三个角上。（无论Version如何，这个图案的尺寸就是这么大7*7）&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/finder.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;二、绘制校正图形（ 5*5）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/alignment-pattern.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;关于Alignment的位置，可以查看[QR Code Spec]的第81页的Table-E.1的定义表（下表是不完全表格）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Alignment-Position.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;下图是根据上述表格中的Version8的一个例子（6，24，42）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/alignment-example.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;三、绘制定位图形&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;接下来是定位图形的线。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Timing-Pattern.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;再接下来是格式信息，下图中的蓝色部分。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Format-Information.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;格式信息是一个15个bits的信息，每一个bit的位置如下图所示：（注意图中的Dark Module，会永远出现）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Format-Info-bits-postion.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这15个bits中包括：&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;5个数据bits：其中，2个bits用于表示使用什么样的Error Correction Level， 3个bits表示使用什么样的Mask&lt;/li&gt;
+    &lt;li&gt;10个纠错bits。主要通过BCH Code来计算&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;然后15个bits还要与101010000010010做XOR操作。这样就保证不会因为我们选用了00的纠错级别和000的Mask，从而造成全部为白色，这会增加我们的扫描器的图像识别的困难。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Format-Information-Example.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;错误级别：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Error-Correction-Indicator-Code.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;四、添加版本信息&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;（版本7以后需要这个编码），下图中的蓝色部分。&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Version-Information.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;版本信息 一共是18个bits，其中包括6个bits的版本号以及12个bits的纠错码，下面是一个示例&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Version-Information-Example.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;而其填充位置如下图：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Version-Information-Position.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;五、绘制数据和数据纠错码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;然后是填接我们的最终编码，最终编码的填充方式如下：从左下角开始沿着红线填我们的各个bits，1是黑色，0是白色。如果遇到了上面的非数据区，则绕开或跳过。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Data-Placement.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;六、转换为掩码图案&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这样下来，我们的图就填好了，但是，也许那些点并不均衡，如果出现大面积的空白或黑块，会告诉我们扫描识别的困难。所以，我们还要做Masking操作,QR的Spec中说了,QR有8个Mask你可以使用，如下所示：其中，各个mask的公式在各个图下面。所谓mask，就是和上面生成的图做XOR操作。Mask只会和数据区进行XOR，不会影响功能区。（&lt;strong&gt;注：选择一个合适的Mask也是有算法的&lt;/strong&gt;）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/masking-pattern.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;其Mask的标识码如下所示：（其中的i,j分别对应于上图的x,y）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Mask-Pattern-Code.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;下面是Mask后的一些样子，我们可以看到被某些Mask XOR了的数据变得比较零散了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/qrcode/Masking-Examples.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Mask过后的二维码就成最终的图了。&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name></name></author><summary type="html">二维码</summary></entry><entry><title type="html">创建私有cocoapods仓库</title><link href="http://localhost:4000/2019/02/14/%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89cocoapods%E4%BB%93%E5%BA%93.html" rel="alternate" type="text/html" title="创建私有cocoapods仓库" /><published>2019-02-14T00:00:00+08:00</published><updated>2019-02-14T00:00:00+08:00</updated><id>http://localhost:4000/2019/02/14/%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89cocoapods%E4%BB%93%E5%BA%93</id><content type="html" xml:base="http://localhost:4000/2019/02/14/%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89cocoapods%E4%BB%93%E5%BA%93.html">&lt;p&gt;我之前写了一篇打包公有组件到cocoapods仓库，但是随着我们项目的逐渐增大，公司内部也有一些私有的组件供公司内部项目的使用，这就需要我们创建私有的仓库来管理组件了，下面我们就使用pods库来管理我们的私有库。&lt;/p&gt;
+
+&lt;h3 id=&quot;一创建版本库repo&quot;&gt;一、创建版本库（repo）&lt;/h3&gt;
+
+&lt;p&gt;首先我们需要在我们的项目管理（git或者svn）中创建我们自己的组件版本库（repo），如果已经创建过了，就无需再创建了，以下以码云为例（因为私有库免费）：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/cocoapods/privateRepo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;回到终端，将私有版本库添加到本地repo中，repo就是repository的缩写&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;repo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;repo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;https:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//gi&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tee&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/macod/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;repo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;git&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在Finder目录中&lt;code class=&quot;highlighter-rouge&quot;&gt;～/.cocoapods/repos&lt;/code&gt;，发现增加了一个repo存储库，如果没有说明失败了&lt;/p&gt;
+
+&lt;h3 id=&quot;二创建组件代码库&quot;&gt;二、创建组件代码库&lt;/h3&gt;
+
+&lt;p&gt;和创建版本库一样，只是要选择一下MIT License&lt;/p&gt;
+
+&lt;p&gt;将组组件代码仓库clone到本地，将打包的组件代码拷贝到项目中&lt;/p&gt;
+
+&lt;p&gt;使用：&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;组件名&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;创建.podspec文件，然后修改podspec文件中的内容，类似如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;Pod::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SwipeView&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;version&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;summary&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;swipe view&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;description&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;swipe view for iOS&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;homepage&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://gitee.com/macod/SwipeView&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;license&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;MIT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;LICENSE&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;author&lt;/span&gt;             &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;zhangzhifang&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;zhangzhifang@zuinianqing.com&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;platform&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;7.0&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;source&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://gitee.com/macod/SwipeView.git&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;#{spec.version}&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;source_files&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SwipeView/**/*.{h,m}&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;requires_arc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;true&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后验证内容修改仓库配置是否正确&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;lib&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;lint&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;根据错误进行修改&lt;/p&gt;
+
+&lt;h3 id=&quot;三将描述文件推送到版本库&quot;&gt;三、将描述文件推送到版本库&lt;/h3&gt;
+
+&lt;p&gt;将项目打上tag推送到远程仓库，tag和版本号要对应&lt;/p&gt;
+
+&lt;p&gt;完成后将描述文件push到版本库&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;repo&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;repo&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;组件名&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;podspec&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;—&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;allow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;warnings&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这个过程其实就是:&lt;/p&gt;
+
+&lt;p&gt;1、拉取远程版本仓库repo&lt;/p&gt;
+
+&lt;p&gt;2、添加组件名.podspec文件到版本库中&lt;/p&gt;
+
+&lt;p&gt;3、push到远程&lt;/p&gt;
+
+&lt;p&gt;这时会对远程仓库进行验证，成功的话会在~/.cocoapods/repos/repo中发现新增的仓库信息了&lt;/p&gt;
+
+&lt;p&gt;若是出现错误信息&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[!] The repo MyRepo at ../.cocoapods/repos/MyRepo is not clean
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;更新下我们的版本库，&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;repo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;MyRepo&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;四私有仓库的使用&quot;&gt;四、私有仓库的使用&lt;/h3&gt;
+
+&lt;p&gt;使用私有仓库需要再Podfile文件中添加指明你的版本库地址&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://gitee.com/macod/repo.git'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里是版本库的地址&lt;/p&gt;
+
+&lt;p&gt;若是还使用了公有的pod库，需要把公有库地址也写上&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;https:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//gi&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;thub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/CocoaPods/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Specs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Podfile类似这样:&lt;/p&gt;
+
+&lt;div class=&quot;language-perl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://github.com/CocoaPods/Specs.git
+source '&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;https:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//gi&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tee&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/macod/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;repo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;git&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'
+
+target '&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DevOCFramwork&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' do
+
+pod &quot;AFNetworking&quot;
+pod &quot;SDWebImage&quot;
+pod &quot;YYModel&quot;
+pod &quot;FMDB&quot;
+pod &quot;SVProgressHUD&quot;
+pod &quot;pop&quot;
+pod &quot;Masonry&quot;
+pod &quot;SwipeView&quot;,    '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&amp;gt;&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0.1&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'        #私有库
+pod &quot;RSA&quot;,          '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&amp;gt;&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0.2&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'        #私有库
+
+    target '&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DevOCFramworkTests&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' do
+		inherit! :search_paths 
+	end
+
+    target '&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DevOCFramworkUITests&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+		&lt;span class=&quot;nv&quot;&gt;inherit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;search_paths&lt;/span&gt; 	
+	&lt;span class=&quot;nv&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最后pod install就好了&lt;/p&gt;
+
+&lt;p&gt;执行&lt;code class=&quot;highlighter-rouge&quot;&gt;pod install&lt;/code&gt;命令时&lt;/p&gt;
+
+&lt;p&gt;1、会拉取远程Podfile中soruce标记版本库到本地的repos文件中&lt;/p&gt;
+
+&lt;p&gt;2、在版本库中搜索我们的 pod ’SwipeView’的SwipeView.podsepc文件&lt;/p&gt;
+
+&lt;p&gt;3、根据SwipeView.podspec文件中描述的源码地址下载并整合到项目中&lt;/p&gt;
+
+&lt;h3 id=&quot;注意️&quot;&gt;注意⚠️&lt;/h3&gt;
+
+&lt;p&gt;如果我们的私有库中组件名和公有库组件名相同了，在Podfile中pod后面不说明版本号的话，会默认导入公有库中的组件，所以我们创建组件的时候最好和公有库中的组件不要重名&lt;/p&gt;
+
+&lt;p&gt;当说明版本号的时候，私有库组件版本号在公有库中也有的话，也是默认导入公有库组件&lt;/p&gt;</content><author><name></name></author><summary type="html">我之前写了一篇打包公有组件到cocoapods仓库，但是随着我们项目的逐渐增大，公司内部也有一些私有的组件供公司内部项目的使用，这就需要我们创建私有的仓库来管理组件了，下面我们就使用pods库来管理我们的私有库。</summary></entry><entry><title type="html">使用jekyll在gitbub page上搭建自己的博客</title><link href="http://localhost:4000/2019/01/15/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2.html" rel="alternate" type="text/html" title="使用jekyll在gitbub page上搭建自己的博客" /><published>2019-01-15T00:00:00+08:00</published><updated>2019-01-15T00:00:00+08:00</updated><id>http://localhost:4000/2019/01/15/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2</id><content type="html" xml:base="http://localhost:4000/2019/01/15/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2.html">&lt;p&gt;大家搞技术的肯定都有自己的博客，比如什么csdn、简书、博客园等等，这都是以别人搭建好的平台来写自己的博客，下面我介绍一下使用jekyll搭建自己的博客的流程。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1、在github创建项目&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;首先需要再github中创建一个github page，命名方式以&lt;a href=&quot;http://username.github.io&quot;&gt;username.github.io&lt;/a&gt;的形式命名，否则会出现不知名的错误，创建完成后克隆到本地，命令行到本地的存储库.io文件下，使用&lt;code class=&quot;highlighter-rouge&quot;&gt;echo “hello world”&amp;gt; index.html&lt;/code&gt;创建一个index.html文件，然后保存，使用命令行把本地创建的文件提交到master分支，。然后使用[https://username/github.io就可以访问index.html网页了。这才是最开始的一步，只是能访问基本的网页，但是怎么写博客哪，然后又是在什么目录下写，使用什么工具写哪，下面就介绍jekyll。&lt;/p&gt;
+
+&lt;p&gt;注意⚠️：提交代码后在setting页面下面的github page选项下选择theme后才可以正确访问&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2、构建jekyll&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;首先安装ruby，因为jekyll是基于ruby语言的，jekyll本身就是一个ruby包，所以需要必须让ruby使用jekyll，Mac系统本身安装了ruby。&lt;/p&gt;
+
+&lt;p&gt;安装jekyll：一旦安装了ruby，就会使ruby的名为Gem的包管理器安装jekyll&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo gem install jekyll bundler&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3、使用jekyll创建本地博客&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;首先使用jekyll命令创建本地文件夹：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ jekyll new my-awesome-site&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;命令行到这个文件夹，测试本地博客&lt;/p&gt;
+
+&lt;p&gt;部署jekll：bundle exec jekyll serve&lt;/p&gt;
+
+&lt;p&gt;如果报告找不到bundle或者jekll，使用sudo，完成后，浏览器访问&lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt;，就可以查看本地index.html网页&lt;/p&gt;
+
+&lt;p&gt;把创建好的jekyll部署到github page，将我们创建的my-awesome-site文件夹中的所有内容拷贝到我们本地的git中，然后提交给git，然后部署一下jekyll，然后浏览器访问：&lt;a href=&quot;https://username.github.io&quot;&gt;https://username.github.io&lt;/a&gt; 就可以访问构建的jekyll博客了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4、修改博客布局&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;修改本地的博客，本地存储博客的文件夹在_posts中，然后通过jekyll编译部署后，在_site/maco中转化成.html的文件，_site文件夹不会上传到git上去的，部署后会生成jekyll节点，可以在_config.yml中配置属性以及信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/jekyll/minima.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/jekyll/site.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;想更好的修改页面，查看http://jekyllcn.com/docs/home/&lt;/p&gt;</content><author><name></name></author><summary type="html">大家搞技术的肯定都有自己的博客，比如什么csdn、简书、博客园等等，这都是以别人搭建好的平台来写自己的博客，下面我介绍一下使用jekyll搭建自己的博客的流程。</summary></entry><entry><title type="html">打包组件到cocoapods</title><link href="http://localhost:4000/2019/01/10/%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6%E5%88%B0cocoapods.html" rel="alternate" type="text/html" title=" 打包组件到cocoapods" /><published>2019-01-10T00:00:00+08:00</published><updated>2019-01-10T00:00:00+08:00</updated><id>http://localhost:4000/2019/01/10/%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6%E5%88%B0cocoapods</id><content type="html" xml:base="http://localhost:4000/2019/01/10/%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6%E5%88%B0cocoapods.html">&lt;p&gt;我们在iOS开发中，相信所有小伙伴都经常使用到cocoapods，使用别人上传的组件用在我们自己的项目中，这会大大节省我们开发的时间，比如AFNetworking、Masonry等等，但是你们有没有想过把自己写的一些好用的组件也放到cocoapods中，让别的小伙伴使用啊，废话不多说，我们直接看流程：&lt;/p&gt;
+
+&lt;p&gt;其实cocoapods也是使用github来进行代码管理的，所以我们也要传一份我们的代码到github上。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;一、在github创建一个项目&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;首先我们需要有一个github账号，账号创建我就不说了，相信大家都会，接下来我们就创建我们的项目，首先我们需要填写我们的项目名称Repository name，然后选择license，gitignore，license是必选的，这个我后面后说，然后点击create repository按钮创建。这样我们的项目就创建好了，但是这还是一个空项目，所以我们要把它clone到我们本地，然后把我们的组件拷贝进去上传到github，代码上传我就不说了，就那一套命令。上传完成后我们要打tag，这个tag必须得打的，这个和我们后面配置spec的version是对应的。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag -a v1.0.0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin v1.0.0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;可以使用git show tag查看我们的打的tag&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;这就完成我们的第一步了，接下来我们上传cocoapods&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;二、上传cocoapods&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;1、命令行cd到我们刚拉下来的工程根目录下，初始化一个Podspec文件，这个文件最好与项目名相同&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod spec create 项目名&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;2、打开我们创建的spec，配置spec文件，tag一定对应github tag，配置的时候有自动生成的一些，比如spec.name、spec.version等，&lt;/p&gt;
+
+&lt;p&gt;Spec.homepage是我们必须填的，它对应我们的github项目地址&lt;/p&gt;
+
+&lt;p&gt;Spec.license也是必须填的，比如 spec.license      = { :type =&amp;gt; “MIT”, :file =&amp;gt; “LICENSE” }&lt;/p&gt;
+
+&lt;p&gt;spec.author就填我们刚创建的就行，比如  spec.author = { “作者” =&amp;gt; “邮箱” }&lt;/p&gt;
+
+&lt;p&gt;Spec.source也是必须填的，对应我们的组件git地址对应的tag号&lt;/p&gt;
+
+&lt;p&gt;Spec.source_files也需要填，对应我们组件都包括什么类型的文件，比如.h，.m文件&lt;/p&gt;
+
+&lt;p&gt;其他的可以选填了&lt;/p&gt;
+
+&lt;p&gt;3、配置完成后，创建pods账号，当然有账号的就不用创建了，创建账号的命令为：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod trunk register 邮箱 联系人 --description=&quot;描述&quot; --verbose&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;然后会发一封邮件到你邮箱进行验证&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod trunk me&lt;/code&gt; 可以查看trunk信息&lt;/p&gt;
+
+&lt;p&gt;4、接下来我们要上传我们的组件&lt;/p&gt;
+
+&lt;p&gt;先使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod spec lint 项目名.podspec&lt;/code&gt; 验证是否通过，如果不通过要修改配置文件&lt;/p&gt;
+
+&lt;p&gt;5、上传组件&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod trunk push&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;在2014年的时候，cocoapods推出了trunk，以后trunk是提交到pod的唯一的方法，不接受对cocoapods specs repo的pull请求。所以在2014年之前，可以在cocoapods的github上把我们刚刚创建的spec文件上传到他们的github上，但是出了trunk后，我们省事了很多，直接上传就好了。&lt;/p&gt;
+
+&lt;h4 id=&quot;那我们怎么pod我们本地的组件到我们的项目中&quot;&gt;&lt;strong&gt;那我们怎么pod我们本地的组件到我们的项目中：&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;同样在打包到项目之前也需要在本地创建好库名称，以及创建podspec配置文件，完成后需要在本地init个git文件，然后提交到git，完成后就可以pod到项目中了，需要注意的是在podfile文件中需要写明该库所在的具体地址，例如：pod ‘RSA01’, :path=&amp;gt; ‘/Users/zhangzhifang/RSA01’ ，执行pod install&lt;/p&gt;
+
+&lt;p&gt;引入成功后在pods项目中会多一个Development pods文件，本地pod库放在该文件夹下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/cocoapods/cacoapodsDic.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;到这里我们基本上就算完成了接下来说一下我打包时遇到的坑&quot;&gt;&lt;strong&gt;到这里我们基本上就算完成了，接下来说一下我打包时遇到的坑&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;h4 id=&quot;注意️&quot;&gt;&lt;strong&gt;注意⚠️：&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;1、在创建git项目的时候，必须要选择license,gitignore，一般情况下选择MIT License，因为MIT是软件授权条款（源自麻省理工学院），选择它就认为你授权了你上传的项目对外开源，被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。不选择license,上传的时候会提示找不到license，到时候验证失败无法上传。当然也可以不选择MIT，选择别的授权条款，如果选择别的，在.podspec文件中配置spec.license的时候需要修改一下type值&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/cocoapods/creategithub.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、如果出现xcrun: error: unable to find utility “simctl”, not a developer tool or in PATH&lt;/p&gt;
+
+&lt;p&gt;错误，去xcode-&amp;gt;preference-&amp;gt;location下选择commons line tools&lt;/p&gt;
+
+&lt;p&gt;3、在验证的时候出现warning的时候，最好解决一下，否则上传的时候有可能会失败（虽然可以使用&lt;em&gt;pod&lt;/em&gt; &lt;em&gt;lib&lt;/em&gt; &lt;em&gt;lint&lt;/em&gt; –&lt;em&gt;allow&lt;/em&gt;-&lt;em&gt;warnings&lt;/em&gt;忽略警告）&lt;/p&gt;
+
+&lt;p&gt;4、如果在pods中搜索不到要找的框架，前往文件夹（快捷键shift + command + G）~/Library/Caches/CocoaPods/ 中删除search_index.json文件，然后重新搜索就可以了&lt;/p&gt;
+
+&lt;p&gt;在上传完成以后在cocoapods官网&lt;a href=&quot;https://cocoapods.xn--org-928dp4do7gtu3blddxoaw0ag08ka19k108z&quot;&gt;https://cocoapods.org暂时是搜不到你的项目的&lt;/a&gt;，不用着急，第二天会搜到。&lt;/p&gt;</content><author><name></name></author><summary type="html">我们在iOS开发中，相信所有小伙伴都经常使用到cocoapods，使用别人上传的组件用在我们自己的项目中，这会大大节省我们开发的时间，比如AFNetworking、Masonry等等，但是你们有没有想过把自己写的一些好用的组件也放到cocoapods中，让别的小伙伴使用啊，废话不多说，我们直接看流程：</summary></entry><entry><title type="html">RXSwift函数响应式编程的讲解以及实现方式</title><link href="http://localhost:4000/maco/2018/12/28/RXSwift.html" rel="alternate" type="text/html" title="RXSwift函数响应式编程的讲解以及实现方式" /><published>2018-12-28T00:00:00+08:00</published><updated>2018-12-28T00:00:00+08:00</updated><id>http://localhost:4000/maco/2018/12/28/RXSwift</id><content type="html" xml:base="http://localhost:4000/maco/2018/12/28/RXSwift.html">&lt;p&gt;&lt;img src=&quot;../../../../assets/swift_img/rxswift.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;函数式编程&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Functional_programming&quot;&gt;函数式编程&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;函数式编程&lt;/strong&gt;是种&lt;a href=&quot;https://en.wikipedia.org/wiki/Programming_paradigm&quot;&gt;编程范式&lt;/a&gt;。它是通过构建函数操作数据序列，然后对这些序列做出响应的编程方式，它需要我们将函数作为参数传递，或者作为返回值返回。我们可以通过组合不同的函数来得到想要的结果。 一种构建计算机程序结构和元素的方式 - 将计算视为数学函数的评估并避免改变状态和可变数据。&lt;/p&gt;
+
+&lt;p&gt;它是一种声明性编程范例，这意味着使用表达式或声明而不是语句来完成编程。在函数代码中，函数的输出值仅取决于传递给函数的参数，因此，对于参数x，使用相同的值调用函数f两次会产生相同的结果f（x）;这与依赖于本地或全局状态的过程形成对比，当使用相同的参数但使用不同的程序状态调用时，这可能在不同的时间产生不同的结果。消除副作用，即不依赖于函数输入的状态变化，可以使得更容易理解和预测程序的行为，这是开发函数编程的关键动机之一。&lt;/p&gt;
+
+&lt;p&gt;本质上，函数式编程只是范畴论的运算方法，跟数理逻辑、微积分、行列式是同一类东西，都是数学方法，只是碰巧它能用来写程序。函数式编程要求函数必须是纯的，不能有副作用？因为它是一种数学运算，原始目的就是求值，不做其他事情，否则就无法满足函数运算法则了。在函数式编程中，函数就是一个管道（pipe）。这头进去一个值，那头就会出来一个新的值，没有其他作用。&lt;/p&gt;
+
+&lt;p&gt;看一个例子：根据条件过滤出数组中一组数据，并以数组的形式返回&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//Array扩充函数&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Array&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//根据条件过滤数组中的整形，并以数组的形式返回&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;oprationFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tempArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;oprationFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as!&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;tempArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as!&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tempArray&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//使用&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//过滤出偶数&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Filter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//系统过滤提供的方法&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;扩充的函数要求传递的是一个闭包, 闭包其实就是一个特殊的函数. 因此, 扩充的函数传递的是另外一个函数&lt;/li&gt;
+  &lt;li&gt;在扩充的函数中我们通过传递的函数来判断数字是否符合需求, 符合需求, 则加入数组中.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;其实在iOS中，masonry就是一个典型的函数式编程，比如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;[self.tabView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.top.mas_equalTo(self.headerSection.mas_bottom).mas_offset(8);
+	make.left.mas_equalTo(self.content.mas_left);
+	make.right.mas_equalTo(self.content.mas_right);
+	make.height.mas_equalTo(65);
+}]
+- (NSArray *)mas_makeConstraints:(void(^)(MASConstraintMaker *))block {
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
+    block(constraintMaker);
+    return [constraintMaker install];
+}
+- (MASConstraint * (^)(id))equalTo {
+    return ^id(id attribute) {
+        return self.equalToWithRelation(attribute, NSLayoutRelationEqual);
+    };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考资料&lt;a href=&quot;https://objccn.io/products/functional-swift/preview/&quot;&gt;函数式Swift&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;响应式编程&quot;&gt;&lt;a href=&quot;https://doc.red-lang.org/zh-hans/reactivity.html#&quot;&gt;响应式编程&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;一种编程范式，数据流编程的一个子集，基于事件“推送”变化。是&lt;strong&gt;通过异步和数据流来构建事务关系的编程模型&lt;/strong&gt;，“事务的关系”是响应式编程的核心理念，“数据流”和“异步”是实现这个核心理念的关键。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/swift_img/xiangying.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;事务&lt;/p&gt;
+
+    &lt;p&gt;事务是一个十分宽泛的概念，它可以是一个变量，一个对象，一段代码，一段业务逻辑…..但实际上我们往往把事务理解成一段业务逻辑（下文你均可以将事务替换为业务逻辑来理解），比如上图中，事务就是指APP初始化中的四个业务逻辑。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;事务的关系&lt;/p&gt;
+
+    &lt;p&gt;这种关系不是类的依赖关系，而是业务之间实际的关系。比如APP初始化中，SDK初始化，数据库初始化，登陆接口，他们共同被跳转页面业务所依赖。但是他们三个本身并没有关联。这也只是业务之间较为简单的关系，实际上，根据我们的需求App端会产生出许多业务之间错综复杂的关系。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;数据流&lt;/p&gt;
+
+    &lt;p&gt;数据流只是事务之间沟通的桥梁。比如在APP初始化中，SDK初始化，数据库初始化，登陆接口这些业务完成之后才会去安排页面跳转的操作，那么这些上游的业务在自己工作完成之后，就需要通知下游，通知下游的方式有很多种，其中最棒的的方式就是通过数据（事件）流。每一个业务完成后，都会有一条数据（一个事件）流向下游，下游的业务收到这条数据（这个事件），才会开始自己的工作。只有数据流是不能完全正确的构建出事务之间的关系的。我们依然需要异步编程。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;异步&lt;/p&gt;
+
+    &lt;p&gt;异步编程本身是有很多优点的，比如挖掘多核心CPU的能力，提高效率，降低延迟和阻塞等等。但实际上，异步编程也给我们构建事务的关系提供了帮助。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;三个重要的概念是响应式流api的构建基础&quot;&gt;三个重要的概念是响应式流API的构建基础：&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;发布者是事件的发送方，可以向它订阅。&lt;/li&gt;
+  &lt;li&gt;订阅者是事件订阅方。&lt;/li&gt;
+  &lt;li&gt;订阅将发布者和订阅者联系起来，使订阅者可以向发布者发送信号。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;响应式编程的好处&quot;&gt;响应式编程的好处：&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在业务层面实现代码逻辑分离，方便后期维护和拓展&lt;/li&gt;
+  &lt;li&gt;极大提高程序响应速度，充分发掘CPU的能力&lt;/li&gt;
+  &lt;li&gt;提高代码的抽象能力和充分理解业务逻辑&lt;/li&gt;
+  &lt;li&gt;Rx丰富的操作符会帮助我们极大的简化代码逻辑&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//b=2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//b=2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Rx是响应式拓展，即支持响应式编程的一种拓展,为响应式在不同语言中的实现提供指导思想&lt;/p&gt;
+
+&lt;h3 id=&quot;关于rxswift&quot;&gt;关于RXSwift：&lt;/h3&gt;
+
+&lt;p&gt;RxSwift是一个可以帮助我们简化异步编程的框架。它拓展了观察者模式。能够自由组合多个异步事件，而不需要去关心线程，同步，线程安全，并发数据以及I/O阻塞。&lt;a href=&quot;https://github.com/ReactiveX/RxSwift&quot;&gt;RxSwift&lt;/a&gt; 是 &lt;a href=&quot;https://github.com/Reactive-Extensions/Rx.NET&quot;&gt;Rx&lt;/a&gt; 的 &lt;strong&gt;Swift&lt;/strong&gt; 版本。它尝试将原有的一些概念移植到 iOS/macOS 平台。Rx通过使用可观察序列和函数样式运算符来组合异步和基于事件的代码，允许通过调度程序进行参数化执行。 Rx是一个多平台标准，RxSwift库（跨平台和语言的大型Rx端口系列的一部分）。&lt;/p&gt;
+
+&lt;p&gt;RXSwift观察者模式如图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../../../assets/swift_img/observer.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;rxswift核心&quot;&gt;RXSwift核心：&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://beeth0ven.github.io/RxSwift-Chinese-Documentation/content/rxswift_core.html&quot;&gt;参考中文文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;那么为什么要使用-rxswift-&quot;&gt;那么为什么要使用 RxSwift ？&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;复合 - Rx 就是复合的代名词&lt;/li&gt;
+  &lt;li&gt;复用 - 因为它易复合&lt;/li&gt;
+  &lt;li&gt;清晰 - 因为声明都是不可变更的&lt;/li&gt;
+  &lt;li&gt;易用 - 因为它抽象的了异步编程，使我们统一了代码风格&lt;/li&gt;
+  &lt;li&gt;稳定 - 因为 Rx 是完全通过单元测试的&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Cookie的深入理解以及在开发中的作用</title><link href="http://localhost:4000/maco/2018/12/27/cookie.html" rel="alternate" type="text/html" title="Cookie的深入理解以及在开发中的作用" /><published>2018-12-27T18:14:06+08:00</published><updated>2018-12-27T18:14:06+08:00</updated><id>http://localhost:4000/maco/2018/12/27/cookie</id><content type="html" xml:base="http://localhost:4000/maco/2018/12/27/cookie.html">&lt;h4 id=&quot;cookie的起源&quot;&gt;cookie的起源&lt;/h4&gt;
+
+&lt;p&gt;早期Web开发面临的最大问题之一是如何管理状态。简言之，服务器端没有办法知道两个请求是否来自于同一个浏览器。那时的办法是在请求的页面中插入一个token，并且在下一次请求中将这个token返回（至服务器）。这就需要在form中插入一个包含token的隐藏表单域，或着在URL的qurey字符串中传递该token。这两种办法都强调手工操作并且极易出错。&lt;/p&gt;
+
+&lt;p&gt;Lou Montulli(卢·蒙特利)，那时是网景通讯的一个雇员，被认为在1994年将“magic cookies”的概念应用到了web通讯中。他意图解决的是web中的购物车，现在所有购物网站都依赖购物车。他的最早的说明文档提供了一些cookies工作原理的基本信息该文档在RFC2109中被规范化（这是所有浏览器实现cookies的参考依据），并且最终逐步形成了REF2965.Montulli最终也被授予了关于cookies的美国专利。网景浏览器在它的第一个版本中就开始支持cookies，并且当前所有web浏览器都支持cookies。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://tools.ietf.org/html/rfc2109&quot;&gt;RFC2109&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://tools.ietf.org/html/rfc2965&quot;&gt;RFC2965&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://tools.ietf.org/html/rfc6265&quot;&gt;RFC6265&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;cookie是什么&quot;&gt;cookie是什么&lt;/h4&gt;
+
+&lt;p&gt;Cookie是服务器保存在浏览器的一小段文本信息，每个 Cookie 的大小一般不能超过4KB。浏览器每次向服务器发出请求，就会自动附上这段信息。&lt;/p&gt;
+
+&lt;h4 id=&quot;cookie的用途&quot;&gt;cookie的用途&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;会话管理&lt;br /&gt;
+1.1 记录用户的登录状态是cookie最常用的用途。通常web服务器会在用户登录成功后下发一个签名来标记session的有效性，这样免去了用户多次认证和登录网站。&lt;br /&gt;
+1.2 记录用户的访问状态，例如导航啊，用户的注册流程啊。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;个性化信息&lt;br /&gt;
+2.1 Cookie也经常用来记忆用户相关的信息，以方便用户在使用和自己相关的站点服务。例如：ptlogin会记忆上一次登录的用户的QQ号码，这样在下次登录的时候会默认填写好这个QQ号码。&lt;br /&gt;
+2.2 Cookie也被用来记忆用户自定义的一些功能。用户在设置自定义特征的时候，仅仅是保存在用户的浏览器中，在下一次访问的时候服务器会根据用户本地的cookie来表现用户的设置。例如google将搜索设置（使用语言、每页的条数，以及打开搜索结果的方式等等）保存在一个COOKIE里。&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;记录用户的行为&lt;br /&gt;
+最典型的是公司的TCSS系统。它使用Cookie来记录用户的点击流和某个产品或商业行为的操作率和流失率。当然功能可以通过IP或http header中的referrer实现，但是Cookie更精准一些。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;创建cookie&quot;&gt;创建cookie&lt;/h4&gt;
+
+&lt;p&gt;服务器如果希望在浏览器保存 Cookie，就要在 HTTP 回应的头信息里面，放置一个&lt;code class=&quot;highlighter-rouge&quot;&gt;Set-Cookie&lt;/code&gt;字段。Set-Cookie消息的格式如下面的字符串（中括号中的部分都是可选的）。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Set-Cookie:name=value [ ;expires=date][ ;max-age=time][ ;domain=domain][ ;path=path][ ;secure][ ;httponly]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面可选的字段是Cookie的属性，一个&lt;code class=&quot;highlighter-rouge&quot;&gt;Set-Cookie&lt;/code&gt;字段里面，可以同时包括多个属性，没有次序的要求。如下一个例子：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如果服务器想改变一个早先设置的 Cookie，必须同时满足四个条件：Cookie 的&lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;domain&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;path&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;secure&lt;/code&gt;都匹配。只要有一个属性不同，就会生成一个全新的 Cookie，而不是替换掉原来那个 Cookie。举例来说，如果原始的 Cookie 是用如下的&lt;code class=&quot;highlighter-rouge&quot;&gt;Set-Cookie&lt;/code&gt;设置的。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Set-Cookie: key1=value1; domain=example.com; path=/blog
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;改变上面这个 Cookie 的值，就必须使用同样的&lt;code class=&quot;highlighter-rouge&quot;&gt;Set-Cookie&lt;/code&gt;。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Set-Cookie: key1=value2; domain=example.com; path=/blog
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;HTTP 回应可以包含多个&lt;code class=&quot;highlighter-rouge&quot;&gt;Set-Cookie&lt;/code&gt;字段，即在浏览器生成多个 Cookie，如下。&lt;/p&gt;
+
+&lt;div class=&quot;language-http highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;HTTP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200&lt;/span&gt; &lt;span class=&quot;ne&quot;&gt;OK&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;Content-type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;text/html&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;Set-Cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yummy_cookie=choco&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;Set-Cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tasty_cookie=strawberry&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;cookie的属性&quot;&gt;cookie的属性&lt;/h4&gt;
+
+&lt;h5 id=&quot;expiresmax-age&quot;&gt;Expires，Max-Age&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Expires&lt;/code&gt;属性指定一个具体的到期时间，到了指定时间以后，浏览器就不再保留这个 Cookie。它的值是 UTC 格式。可以通过设置它的&lt;code class=&quot;highlighter-rouge&quot;&gt;expires&lt;/code&gt;属性为一个过去的日期来删除这个cookie。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Max-Age&lt;/code&gt;属性指定从现在开始 Cookie 存在的秒数，比如&lt;code class=&quot;highlighter-rouge&quot;&gt;60 * 60 * 24 * 365&lt;/code&gt;（即一年）。过了这个时间以后，浏览器就不再保留这个 Cookie。&lt;/p&gt;
+
+&lt;p&gt;如果同时指定了&lt;code class=&quot;highlighter-rouge&quot;&gt;Expires&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;Max-Age&lt;/code&gt;，那么&lt;code class=&quot;highlighter-rouge&quot;&gt;Max-Age&lt;/code&gt;的值将优先生效。&lt;/p&gt;
+
+&lt;p&gt;如果&lt;code class=&quot;highlighter-rouge&quot;&gt;Set-Cookie&lt;/code&gt;字段没有指定&lt;code class=&quot;highlighter-rouge&quot;&gt;Expires&lt;/code&gt;或&lt;code class=&quot;highlighter-rouge&quot;&gt;Max-Age&lt;/code&gt;属性，那么这个 Cookie 就是 Session Cookie，即它只在本次对话存在，一旦用户关闭浏览器，浏览器就不会再保留这个 Cookie。&lt;/p&gt;
+
+&lt;h5 id=&quot;domain&quot;&gt;Domain&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Domain&lt;/code&gt;属性指定浏览器发出 HTTP 请求时，哪些域名要附带这个 Cookie。如果没有指定该属性，浏览器会默认将其设为当前 URL 的一级域名，比如&lt;code class=&quot;highlighter-rouge&quot;&gt;www.example.com&lt;/code&gt;会设为&lt;code class=&quot;highlighter-rouge&quot;&gt;.example.com&lt;/code&gt;，而且以后如果访问&lt;code class=&quot;highlighter-rouge&quot;&gt;.example.com&lt;/code&gt;的任何子域名，HTTP 请求也会带上这个 Cookie。如果服务器在&lt;code class=&quot;highlighter-rouge&quot;&gt;Set-Cookie&lt;/code&gt;字段指定的域名，不属于当前域名，浏览器会拒绝这个 Cookie。&lt;/p&gt;
+
+&lt;p&gt;RFC2109规定domain必须满足以.开头。&lt;/p&gt;
+
+&lt;h5 id=&quot;path&quot;&gt;Path&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Path&lt;/code&gt;属性指定浏览器发出 HTTP 请求时，哪些路径要附带这个 Cookie。只要浏览器发现，&lt;code class=&quot;highlighter-rouge&quot;&gt;Path&lt;/code&gt;属性是 HTTP 请求路径的开头一部分，就会在头信息里面带上这个 Cookie。比如，&lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt;属性是&lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;，那么请求&lt;code class=&quot;highlighter-rouge&quot;&gt;/docs&lt;/code&gt;路径也会包含该 Cookie。当然，前提是域名必须一致。path属性的默认值是发送Set-Cookie消息头所对应的URL中的path部分。&lt;/p&gt;
+
+&lt;h5 id=&quot;secure&quot;&gt;Secure&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Secure&lt;/code&gt;属性指定浏览器只有在加密协议 HTTPS 下，才能将这个 Cookie 发送到服务器，以确保cookie在从客户端传递到Server的过程中始终加密的。该属性只是一个开关，不需要指定值。如果通信是 HTTPS 协议，该开关自动打开。&lt;/p&gt;
+
+&lt;h5 id=&quot;httponly&quot;&gt;HttpOnly&lt;/h5&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;HttpOnly&lt;/code&gt;属性指定该 Cookie 无法通过 JavaScript 脚本拿到，主要是&lt;code class=&quot;highlighter-rouge&quot;&gt;Document.cookie&lt;/code&gt;属性、&lt;code class=&quot;highlighter-rouge&quot;&gt;XMLHttpRequest&lt;/code&gt;对象和 Request API 都拿不到该属性。这样就防止了该 Cookie 被脚本读到，只有浏览器发出 HTTP 请求时，才会带上该 Cookie。&lt;/p&gt;
+
+&lt;h4 id=&quot;发送cookie&quot;&gt;发送cookie&lt;/h4&gt;
+
+&lt;p&gt;当一个cookie存在，并且可选条件允许的话，该cookie的值会在接下来的每个请求中被发送至服务器。cookie的值被存储在名为Cookie的HTTP消息头中，例如：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Cookie : name=value
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如果在指定的请求中有多个cookies，那么它们会被分号和空格分开，例如：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Cookie:name1=value1 ; name2=value2 ; name3=value3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;cookie缺陷&quot;&gt;Cookie缺陷&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Cookie会被附加在每个HTTP请求中，所以无形中增加了流量。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;由于在HTTP请求中的Cookie是明文传递的，所以安全性成问题，除非用HTTPS。&lt;/li&gt;
+  &lt;li&gt;Cookie的大小限制在4KB左右，对于复杂的存储需求来说是不够用的。&lt;/li&gt;
+  &lt;li&gt;状态不一致，后退导致cookie不会重置。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;cookie在android中的使用&quot;&gt;Cookie在Android中的使用&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookie持久化&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;持久化保存cookie有很多方式，可以用数据库，可以用文件，SharedPreferences，还可以保存到系统Webview的CookieManager里（其实也是个数据库）。&lt;/p&gt;
+
+&lt;p&gt;如果我们自己本地保存cookie，要做好本地Cookie和Webview的cookie同步，所以最好的办法是保存到系统Webview的CookieManager里，取的时候从Webview的CookieManager里取。&lt;/p&gt;
+
+&lt;p&gt;例子：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/franmontiel/PersistentCookieJar&quot;&gt;https://github.com/franmontiel/PersistentCookieJar&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A persistent CookieJar implementation for OkHttp 3 based on SharedPreferences.&lt;/p&gt;
+
+&lt;h4 id=&quot;okhttp3-中实现-cookie-持久化管理&quot;&gt;OkHttp3 中实现 Cookie 持久化管理&lt;/h4&gt;
+
+&lt;p&gt;3.0之后OKHttp是加了CookieJar和Cookie两个类的，通过实现CookieJar即可管理cookie。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CookiesManager&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CookieJar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PersistentCookieStore&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cookieStore&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PersistentCookieStore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;saveFromResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpUrl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cookie&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cookies&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cookies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cookies&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cookie&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cookies&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;cookieStore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cookie&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loadForRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpUrl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cookie&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cookies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cookieStore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cookies&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;OkHttpClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OkHttpClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cookieJar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CookiesManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;webview中的cookie机制&quot;&gt;WebView中的Cookie机制&lt;/h4&gt;
+
+&lt;p&gt;WebView是基于webkit内核的UI控件，相当于一个浏览器客户端。它会在本地维护每次会话的cookie(保存在data/data/package_name/app_WebView/Cookies)。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/image-20180914150451187.png&quot; alt=&quot;cookie目录&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当WebView加载URL的时候,WebView会从本地读取该URL对应的cookie，并携带该cookie与服务器进行通信。WebView通过android.webkit.CookieManager类来维护cookie。CookieManager是 WebView的cookie管理类。&lt;/p&gt;
+
+&lt;p&gt;之前同步cookie需要用到CookieSyncManager类，现在这个类已经被deprecated。如今WebView已经可以在需要的时候自动同步cookie了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CookieSyncManager&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在SDK21以下，使用CookieSyncManager在内存和存储器之间同步浏览器的cookie。另外CookieSyncManager同步策略是在一个独立的线程里定时进行同步。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;cookie开始同步：注意每次同步的时间间隔是5分钟&lt;/p&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;CookieSyncManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;CookieSyncManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startSync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;cookie停止同步：&lt;/p&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;CookieSyncManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stopSync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;cookie立即同步：调用了该方法会立即进行cookie的同步，代码如下：&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//一般是在webview中的onPageFinished(WebView, String)方法进行强制同步
+CookieSyncManager.getInstance().sync()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;删除cookie操作：&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CookieSyncManager.createInstance(this); 
+CookieManager.getInstance().removeAllCookie(); CookieManager.getInstance().removeSessionCookie(); CookieSyncManager.getInstance().sync(); 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;CookieManager&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;从sdk21之后，webview已经内置了cookie的同步操作了。&lt;/p&gt;
+
+&lt;p&gt;删除所有Cookie&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;CookieManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeAllCookies&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;CookieManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;保存Cookie&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CookieManager.getInstance().setCookie(String url, String value)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;获取Cookie&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CookieManager.getInstance().getCookie(url)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;综合两个Manager, 最后写法：&lt;/p&gt;
+
+&lt;p&gt;同步Cookie&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;CookieSyncManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SDK_INT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;CookieSyncManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;CookieManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;删除所有Cookie&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;CookieSyncManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;CookieManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeAllCookie&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CookieManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeSessionCookie&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SDK_INT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;CookieSyncManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;CookieManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;cookie在ios中的使用&quot;&gt;Cookie在iOS中的使用&lt;/h3&gt;
+
+&lt;h5 id=&quot;cookie获取和存储&quot;&gt;Cookie获取和存储&lt;/h5&gt;
+
+&lt;p&gt;NSHTTPCookieStorage会自动存储NSHttpRequest的所有请求产生的cookie，需要删除的时候我们会手动移除cookie。&lt;/p&gt;
+
+&lt;h5 id=&quot;cookie的内容&quot;&gt;Cookie的内容&lt;/h5&gt;
+
+&lt;p&gt;cookie 中包含了一个由 名字 = 值 （name=value） 这样的信息构成的任意列表&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CM_S=v1_2_b91cf9ddaaf767e7a986cd509d66806c; expires=Fri, 12-Oct-2018 19:00:00 GMT; path=/; domain=charminginsurance.cn; httponly
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;cookie的手动管理&quot;&gt;Cookie的手动管理&lt;/h5&gt;
+
+&lt;p&gt;cookie的手动主要有添加和删除两中，从服务器获取到cookie后，会将cookie存在本地，给请求头添加cookie。本地cookie不能使用或者用户退出登录，会将存在本地cookie清除，同时清空缓存。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;//添加Cookie
+[NetTools.requestSerializer setValue:netCookie forHTTPHeaderField:@&quot;cookie&quot;];
+NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:cookie forKey:COOKIE_KEY];
+    [userDefault synchronize];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;//清除本地和afn的cookie 和缓存
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault removeObjectForKey:COOKIE_KEY];
+    NSArray *arrOfCookie = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:BaseURL]];
+    LCLog(@&quot;%lu&quot;,(unsigned long)arrOfCookie.count);
+    for (NSHTTPCookie *cookie in arrOfCookie)
+    {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    [userDefault synchronize];
+    NetTools.netCookie = nil;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;uiweview和wkwebview中的cookie使用&quot;&gt;UIWeview和WKWebview中的Cookie使用&lt;/h4&gt;
+
+&lt;p&gt;UIWebView会将NSHttpRequest的所有请求产生的cookie自动保存，并且，在同一个app内多个UIWebView之间共享，不需要我们做任何操作。&lt;/p&gt;
+
+&lt;p&gt;WKWebView不会和NSHttpRequest共享cookie，因此，如果登录接口用AFN，那么WKWebView是读取不到登录之后的cookie的。需要手动添加cookie。&lt;/p&gt;
+
+&lt;p&gt;WKWebView中，只有使用了同一个WKProcessPool的WKWebView，才会共享cookie在单例中，创建一个WKProcessPool单例对象，讲WKwebview的processPool属性设置为同一个就可以了。&lt;/p&gt;</content><author><name></name></author><summary type="html">cookie的起源</summary></entry><entry><title type="html">微信小程序网络请求之wx.request</title><link href="http://localhost:4000/maco/2017/01/11/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82.html" rel="alternate" type="text/html" title="微信小程序网络请求之wx.request" /><published>2017-01-11T00:00:00+08:00</published><updated>2017-01-11T00:00:00+08:00</updated><id>http://localhost:4000/maco/2017/01/11/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82</id><content type="html" xml:base="http://localhost:4000/maco/2017/01/11/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82.html">&lt;p&gt;最近微信小程序开始开放测试了，小程序提供了很多api，极大的方便了开发者，其中网络请求api是wx.request(object)，这是小程序与开发者的服务器实现数据交互的一个很重要的api。
+大家可以先看官方文档&lt;a href=&quot;https://mp.weixin.qq.com/debug/wxadoc/dev/api/?t=201715&quot;&gt;微信小程序API&lt;/a&gt;
+再给大家提供一个开发工具下载地址&lt;a href=&quot;https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html?t=201715&quot;&gt;小程序开发工具&lt;/a&gt;
+最简单的用法如下（以POST请求为例）&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bindSearchChange:function(e){  
+       var keyword = e.detail.value;  
+       wx.request({  
+         url:'xxxxxxxxx',  
+         data:{},  
+         header: {'Content-Type': 'application/json'},  
+         success: function(res) {  
+           console.log(res)  
+         }  
+       })  
+     }  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;下面我们把请求写在service文件下的http.js文件中，代码如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; var rootDocment = 'hxxxxx';//你的域名  
+    function req(url,data,cb){  
+        wx.request({  
+          url: rootDocment + url,  
+          data: data,  
+          method: 'post',  
+          header: {'Content-Type': 'application/json'},  
+          success: function(res){  
+            return typeof cb == &quot;function&quot; &amp;amp;&amp;amp; cb(res.data)  
+          },  
+          fail: function(){  
+            return typeof cb == &quot;function&quot; &amp;amp;&amp;amp; cb(false)  
+          }  
+        })  
+    }  
+
+
+    module.exports = {  
+      req: req  
+    }  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;其中module.exports是将req方法暴露出去使得别的文件中可以使用该方法，由于js函数是异步执行的，所以return 的是回调函数，而不是具体的数据&lt;/p&gt;
+
+&lt;p&gt;为了其他文件方便调用此方法，我们在根目录的app.js文件中将其注册成为全局函数，如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//app.js  
+    var http = require('service/http.js')  
+    App({  
+      onLaunch: function () {  
+        //调用API从本地缓存中获取数据  
+        var logs = wx.getStorageSync('logs') || []  
+        logs.unshift(Date.now())  
+        wx.setStorageSync('logs', logs)  
+      },  
+      getUserInfo:function(cb){  
+        var that = this  
+        if(this.globalData.userInfo){  
+          typeof cb == &quot;function&quot; &amp;amp;&amp;amp; cb(this.globalData.userInfo)  
+        }else{  
+          //调用登录接口  
+          wx.login({  
+            success: function () {  
+              wx.getUserInfo({  
+                success: function (res) {  
+                  that.globalData.userInfo = res.userInfo  
+                  typeof cb == &quot;function&quot; &amp;amp;&amp;amp; cb(that.globalData.userInfo)  
+                }  
+              })  
+            }  
+          })  
+        }  
+      },  
+      globalData:{  
+        userInfo:null  
+      },  
+      func:{  
+        req:http.req  
+      }  
+    }) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这时这个req就是全局的了，在调用时我们可以使用getApp.func.req()来调用，具体如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var app = getApp()  
+    Page({  
+      data: {  
+
+      },  
+      onLoad: function (opt) {  
+        //console.log(opt.name)  
+       app.func.req('/api/get_data',{},function(res){  
+         console.log(res)  
+        });  
+      }  
+    })  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">最近微信小程序开始开放测试了，小程序提供了很多api，极大的方便了开发者，其中网络请求api是wx.request(object)，这是小程序与开发者的服务器实现数据交互的一个很重要的api。 大家可以先看官方文档微信小程序API 再给大家提供一个开发工具下载地址小程序开发工具 最简单的用法如下（以POST请求为例）</summary></entry><entry><title type="html">Git常用命令行总结</title><link href="http://localhost:4000/maco/2016/11/24/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93.html" rel="alternate" type="text/html" title="Git常用命令行总结" /><published>2016-11-24T00:00:00+08:00</published><updated>2016-11-24T00:00:00+08:00</updated><id>http://localhost:4000/maco/2016/11/24/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93</id><content type="html" xml:base="http://localhost:4000/maco/2016/11/24/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%80%BB%E7%BB%93.html">&lt;h4 id=&quot;查看添加提交删除找回重置修改文件&quot;&gt;查看、添加、提交、删除、找回，重置修改文件&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git help &amp;lt;command&amp;gt;  显示command的help&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git show  显示某次提交的内容 git show $id&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co -- &amp;lt;file&amp;gt;  抛弃工作区修改&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co .  抛弃工作区修改&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git add &amp;lt;file&amp;gt;  将工作文件修改提交到本地暂存区&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git add .    --------&amp;gt; 将所有修改过的工作文件提交暂存区&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git rm &amp;lt;file&amp;gt;    --------&amp;gt; 从版本库中删除文件&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git rm &amp;lt;file&amp;gt; --cached    --------&amp;gt; 从版本库中删除文件，但不删除文件&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git reset &amp;lt;file&amp;gt;    --------&amp;gt; 从暂存区恢复到工作文件&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git reset -- .    --------&amp;gt; 从暂存区恢复到工作文件&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git reset --hard    --------&amp;gt; 恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git ci &amp;lt;file&amp;gt; git ci . git ci -a    --------&amp;gt; 将git add, git rm和git ci等操作都合并在一起做&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git ci -am &quot;some comments&quot;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git ci --amend    --------&amp;gt; 修改最后一次提交记录&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git revert &amp;lt;$id&amp;gt;    --------&amp;gt; 恢复某次提交的状态，恢复动作本身也创建次提交对象&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git revert HEAD    --------&amp;gt; 恢复最后一次提交的状态&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;查看文件diff&quot;&gt;查看文件diff&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff &amp;lt;file&amp;gt;    --------&amp;gt; 比较当前文件和暂存区文件差异 git diff&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff &amp;lt;id1&amp;gt;&amp;lt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;id2&amp;gt;    --------&amp;gt; 比较两次提交之间的差异&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff &amp;lt;branch1&amp;gt;..&amp;lt;branch2&amp;gt;    --------&amp;gt; 在两个分支之间比较&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff --staged    --------&amp;gt; 比较暂存区和版本库差异&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff --cached    --------&amp;gt; 比较暂存区和版本库差异&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff --stat    --------&amp;gt; 仅仅比较统计信息&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;查看提交记录&quot;&gt;查看提交记录&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log git log &amp;lt;file&amp;gt;    --------&amp;gt; 查看该文件每次提交记录&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log -p &amp;lt;file&amp;gt;    --------&amp;gt; 查看每次详细修改内容的diff&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log -p -2    --------&amp;gt; 查看最近两次详细修改内容的diff&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log --stat    --------&amp;gt;查看提交统计信息&lt;/code&gt;
+    &lt;h4 id=&quot;tig&quot;&gt;tig&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Mac上可以使用tig代替diff和log，brew install tig&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;git-本地分支管理-查看切换创建和删除分支&quot;&gt;Git 本地分支管理 查看、切换、创建和删除分支&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git br -r    --------&amp;gt; 查看远程分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git br &amp;lt;new_branch&amp;gt;    --------&amp;gt; 创建新的分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git br -v    --------&amp;gt; 查看各个分支最后提交信息&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git br --merged    --------&amp;gt; 查看已经被合并到当前分支的分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git br --no-merged    --------&amp;gt; 查看尚未被合并到当前分支的分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co &amp;lt;branch&amp;gt;    --------&amp;gt; 切换到某个分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co -b &amp;lt;new_branch&amp;gt;    --------&amp;gt; 创建新的分支，并且切换过去&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co -b &amp;lt;new_branch&amp;gt; &amp;lt;branch&amp;gt;    --------&amp;gt; 基于branch创建新的new_branch&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co $id    --------&amp;gt; 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co $id -b &amp;lt;new_branch&amp;gt;    --------&amp;gt; 把某次历史提交记录checkout出来，创建成一个分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git br -d &amp;lt;branch&amp;gt;    --------&amp;gt; 删除某个分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git br -D &amp;lt;branch&amp;gt;    --------&amp;gt; 强制删除某个分支 (未被合并的分支被删除的时候需要强制)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;分支合并和rebase&quot;&gt;分支合并和rebase&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge &amp;lt;branch&amp;gt;    --------&amp;gt; 将branch分支合并到当前分支&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge origin/master --no-ff    --------&amp;gt; 不要Fast-Foward合并，这样可以生成merge提交&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase master &amp;lt;branch&amp;gt;    --------&amp;gt; 将master rebase到branch，相当于： git co&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;branch&amp;gt; &amp;amp;&amp;amp; git rebase master &amp;amp;&amp;amp; git co master &amp;amp;&amp;amp; git merge &amp;lt;branch&amp;gt;&lt;/code&gt;
+    &lt;h4 id=&quot;git补丁管理方便在多台机器上开发同步时用&quot;&gt;Git补丁管理(方便在多台机器上开发同步时用)&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff &amp;gt; ../sync.patch    --------&amp;gt; 生成补丁&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git apply ../sync.patch    --------&amp;gt; 打补丁&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git apply --check ../sync.patch    --------&amp;gt;测试补丁能否成功&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;git暂存管理&quot;&gt;Git暂存管理&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash    --------&amp;gt; 暂存&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash list    --------&amp;gt; 列所有stash&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash apply    --------&amp;gt; 恢复暂存的内容&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash drop    --------&amp;gt; 删除暂存区&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;git远程分支管理&quot;&gt;Git远程分支管理&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull    --------&amp;gt; 抓取远程仓库所有分支更新并合并到本地&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull --no-ff    --------&amp;gt; 抓取远程仓库所有分支更新并合并到本地，不要快进合并&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git fetch origin    --------&amp;gt; 抓取远程仓库更新&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge origin/master    --------&amp;gt; 将远程主分支合并到本地当前分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co --track origin/branch    --------&amp;gt; 跟踪某个远程分支创建相应的本地分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git co -b &amp;lt;local_branch&amp;gt; origin/&amp;lt;remote_branch&amp;gt;    --------&amp;gt; 基于远程分支创建本地分支，功能同上&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push    --------&amp;gt; push所有分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin master    --------&amp;gt; 将本地主分支推到远程主分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push -u origin master    --------&amp;gt; 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin &amp;lt;local_branch&amp;gt;    --------&amp;gt; 创建远程分支， origin是远程仓库名&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin &amp;lt;local_branch&amp;gt;:&amp;lt;remote_branch&amp;gt;    --------&amp;gt; 创建远程分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin :&amp;lt;remote_branch&amp;gt;    --------&amp;gt;先删除本地分支(git br -d&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;branch&amp;gt;)，然后再push删除远程分支&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;git远程仓库管理&quot;&gt;Git远程仓库管理&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote -v    --------&amp;gt; 查看远程服务器地址和仓库名称&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote show origin    --------&amp;gt; 查看远程服务器仓库状态&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote add origin git@ github:robbin/robbin_site.git    --------&amp;gt; 添加远程仓库地址&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote set-url origin git@ github.com:robbin/robbin_site.git    --------&amp;gt;&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;设置远程仓库地址(用于修改远程仓库地址) git remote rm &amp;lt;repository&amp;gt;    --------&amp;gt; 删除远程仓库&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;创建远程仓库&quot;&gt;创建远程仓库&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git clone --bare robbin_site robbin_site.git    --------&amp;gt; 用带版本的项目创建纯版本仓库&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;scp -r my_project.git git@ git.csdn.net:~    --------&amp;gt; 将纯仓库上传到服务器上&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir robbin_site.git &amp;amp;&amp;amp; cd robbin_site.git &amp;amp;&amp;amp; git --bare init    --------&amp;gt;&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;在服务器创建纯仓库&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote add origin git@ github.com:robbin/robbin_site.git    --------&amp;gt;&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;设置远程仓库地址&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push -u origin master    --------&amp;gt; 客户端首次提交&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push -u origin develop    --------&amp;gt; 首次将本地develop分支提交到远程develop分支，并且track&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote set-head origin master    --------&amp;gt; 设置远程仓库的HEAD指向master分支&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;也可以命令设置跟踪远程库和本地库&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch --set-upstream master origin/master&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch --set-upstream develop origin/develop&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">查看、添加、提交、删除、找回，重置修改文件</summary></entry><entry><title type="html">verilog中timesclae的使用</title><link href="http://localhost:4000/maco/2015/12/30/timescale.html" rel="alternate" type="text/html" title="verilog中timesclae的使用" /><published>2015-12-30T00:00:00+08:00</published><updated>2015-12-30T00:00:00+08:00</updated><id>http://localhost:4000/maco/2015/12/30/timescale</id><content type="html" xml:base="http://localhost:4000/maco/2015/12/30/timescale.html">&lt;p&gt;&lt;strong&gt;描述:&lt;/strong&gt;
+timescale是Verilog HDL 中的一种时间尺度预编译指令，它用来定义模块的仿真 时的时间单位和时间精度。格式如下：&lt;/p&gt;
+
+&lt;p&gt;`timescale  仿真时间单位/时间精度&lt;/p&gt;
+
+&lt;p&gt;注意：用于说明仿真时间单位和时间精度的 数字只能是1、10、100，不能为其它的数字。而且，时间精度不能比时间单位还要大。最多两则一样大。比如：下面定义都是对的：&lt;/p&gt;
+
+&lt;p&gt;`timescale   1ns/1ps&lt;/p&gt;
+
+&lt;p&gt;`timescale   100ns/100ns&lt;/p&gt;
+
+&lt;p&gt;下面的定义是错的：&lt;/p&gt;
+
+&lt;p&gt;`timescale  1ps/1ns&lt;/p&gt;
+
+&lt;p&gt;时间精度就是模块仿真时间和延时的精确程序，比如：定义时间精度为10ns， 那么时序中所有的延时至多能精确到10ns，而8ns或者18ns是不可能做到的。
+在编译过程中,timescale指令影响这一编译器指令后面所有模块中的时延值，直至遇到另一个timescale指令resetall指令。
+在verilog中是没有默认timescale的，一个没有指定timescale的verilog模块就有可能错误的继承了前面编译模块的无效timescale参数.
+下面举个简单的例子说明一下:
+比如我们来获取一首歌曲的当前时间&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//计算当前音乐时间
+        NSTimeInterval time = self.player.currentTime.value / self.player.currentTime.timescale;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;以下转载另一篇文章
+当一个设计中的多个模块带有自身的timescale编译指令时将发生什么?在这种情况下，模拟器总是定位在所有模块的最小时延精度上，并且所有时延都相应的换算为最小时延精度例如:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;timescale 1ns/100ps
+MODULE AndFunc(Z,A,B);
+OUTPUT Z;
+input A,B;
+and #(5.22,6.17) AL(Z,A,B);
+endMODULE
+
+timescale 10ns/1ns
+MODULE TB;
+reg PutA,PutB;
+WHRE GetO;
+initial
+begin
+PutA = 0;
+PutB = 0;
+#5.21 PutB = 1;
+#10.4 PutA = 1;
+#15 PutB = 0;
+end
+AndFunc AF1(GetO,PutA,PutB);
+endMODULE
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这个例子中，每个模块都有自身的timescale编译器指令。timescale编译器指令第一次应用于时延。因此在第一个模块中，5.22对应5.2ns，6.17对应6.2ns;在第二个模块中5.21对应52ns，10.4对应104ns，15对应150ns，如果仿真模块TB，设计中的所有模块最小时间精度为100ps。因此，所有延迟（特别是模块TB中的延迟）将换算成精度为100ps。延迟52ns现在对应520&lt;em&gt;100ps，104对应1040&lt;/em&gt;100ps，150对应1500*100ps，更重要的是，仿真使用100ps为时间精度。如果仿真模块AndFunc，由于模块TB不是模块AndFunc的子模块，模块TB中的timescale程序指令将不再有效。&lt;/p&gt;</content><author><name></name></author><summary type="html">描述: timescale是Verilog HDL 中的一种时间尺度预编译指令，它用来定义模块的仿真 时的时间单位和时间精度。格式如下：</summary></entry></feed>
